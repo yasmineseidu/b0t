@@ -2,14 +2,6 @@
 description: Commit MY custom work to smarter-b0t branch
 ---
 
-Save your custom modifications to YOUR smarter-b0t branch.
-
-## What This Does:
-- Commits to YOUR smarter-b0t branch (your custom version)
-- Analyzes what you changed
-- Creates a clear commit message
-- Pushes to YOUR fork on GitHub
-
 ## Process:
 1. Check you're on smarter-b0t branch (switches if needed)
 2. Show what changed: `git status`
@@ -22,7 +14,7 @@ Save your custom modifications to YOUR smarter-b0t branch.
 
 ## Example:
 ```
-You: /commit-smarter-b0t
+You: /commit-to-smarter-b0t
 
 Me:
 Found changes in: dashboard.js, api.js
@@ -35,8 +27,3 @@ Me:
 ✅ Committed to smarter-b0t
 ✅ Pushed to YOUR fork
 ```
-
-## When To Use:
-- After making custom changes
-- When you want to save your work
-- Daily commits to YOUR version

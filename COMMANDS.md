@@ -1,109 +1,37 @@
-# Your 3 Git Commands
+# Commands
 
-## The Commands
-
-### 1. /commit-smarter-b0t
-**What it means:** Save MY custom work  
-**Where it goes:** YOUR smarter-b0t branch  
-**When to use:** You made changes for yourself
-
+## /commit-to-smarter-b0t
+Save YOUR custom work to smarter-b0t branch
 ```
-/commit-smarter-b0t
+/commit-to-smarter-b0t
 ```
 
----
-
-### 2. /commit-b0t
-**What it means:** Give this to everyone  
-**Where it goes:** Feature branch → Pull Request → Original repo  
-**When to use:** You fixed something for the community
-
+## /commit-to-b0t
+Contribute to original b0t repo (creates PR)
 ```
-/commit-b0t
+/commit-to-b0t
 ```
 
----
-
-### 3. /sync-with-b0t
-**What it means:** Get latest from original b0t  
-**Where it goes:** From KenKaiii/b0t → Your branches  
-**When to use:** You want newest updates from original
-
+## /sync-with-b0t
+Get latest updates from KenKaiii/b0t
 ```
 /sync-with-b0t
 ```
 
 ---
 
-## Super Simple
+## Or Use Natural Language
 
-| Command | In Plain English |
-|---------|------------------|
-| `/commit-smarter-b0t` | "Save my custom stuff" |
-| `/commit-b0t` | "Share this with everyone" |
-| `/sync-with-b0t` | "Get latest from KenKaiii" |
-
----
-
-## Examples
-
-### You're working on YOUR features:
-```
-*add custom dashboard*
-/commit-smarter-b0t
-```
-
-### You fixed a bug for EVERYONE:
-```
-*fix login issue*
-/commit-b0t
-```
-
-### Original b0t got updated:
-```
-/sync-with-b0t
-```
+- "commit my changes" → `/commit-to-smarter-b0t`
+- "contribute this back" → `/commit-to-b0t`
+- "sync from original" → `/sync-with-b0t`
 
 ---
 
 ## Decision Helper
 
-**Ask yourself:** "What am I doing?"
-
-- Saving MY work → `/commit-smarter-b0t`
-- Sharing with EVERYONE → `/commit-b0t`
-- Getting UPDATES → `/sync-with-b0t`
-
----
-
-## Complete Week
-
-```
-Monday:
-/sync-with-b0t            ← Get latest from KenKaiii
-*work*
-/commit-smarter-b0t       ← Save my work
-
-Tuesday:
-*more work*
-/commit-smarter-b0t       ← Save again
-
-Wednesday:
-*fix bug*
-/commit-b0t               ← Share with everyone
-
-Friday:
-/sync-with-b0t            ← Get updates
-/commit-smarter-b0t       ← Save week's work
-```
-
----
-
-## That's It!
-
-Three commands:
-1. `/commit-smarter-b0t` - Save yours
-2. `/commit-b0t` - Share with everyone
-3. `/sync-with-b0t` - Get updates from original
-
-Matches the b0t repo name perfectly.
+| Doing What? | Use This |
+|-------------|----------|
+| Made custom changes for ME | `/commit-to-smarter-b0t` |
+| Fixed something for EVERYONE | `/commit-to-b0t` |
+| Want latest from original | `/sync-with-b0t` |

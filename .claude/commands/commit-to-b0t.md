@@ -2,14 +2,6 @@
 description: Contribute to the ORIGINAL b0t repo
 ---
 
-Prepare a professional contribution to submit to KenKaiii/b0t (the original repo).
-
-## What This Does:
-- Creates a feature branch for your contribution
-- Writes a professional commit message
-- Pushes to YOUR fork
-- Guides you to create Pull Request
-
 ## Process:
 1. Check current branch
    - If on main: Ask for feature branch name
@@ -29,7 +21,7 @@ Prepare a professional contribution to submit to KenKaiii/b0t (the original repo
 
 ## Example:
 ```
-You: /commit-b0t
+You: /commit-to-b0t
 
 Me:
 You're on main. Create feature branch.
@@ -53,8 +45,3 @@ Me:
 Next: Create PR at github.com/yasmineseidu/b0t
 Submit to: KenKaiii/b0t
 ```
-
-## When To Use:
-- You fixed a bug for everyone
-- You added a feature for the original project
-- Contributing back to the community
