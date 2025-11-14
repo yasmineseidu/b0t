@@ -2,7 +2,7 @@
 description: Sync YOUR fork with original KenKaiii/b0t repo
 ---
 
-Get the latest updates from the original bot project and merge into your branches.
+Get the latest updates from the original b0t project and merge into your branches.
 
 ## What This Does:
 - Pulls latest from KenKaiii/b0t (original repo)
@@ -22,7 +22,7 @@ Get the latest updates from the original bot project and merge into your branche
 
 ## Example:
 ```
-You: /sync-with-bot
+You: /sync-with-b0t
 
 Me:
 Checking for updates from KenKaiii/b0t...
@@ -45,7 +45,7 @@ Files changed: 12
 ```
 
 ## When To Use:
-- Weekly to stay current with original bot
+- Weekly to stay current with original b0t
 - Before contributing back
 - After seeing new releases from KenKaiii
 - When you want latest features/fixes from original

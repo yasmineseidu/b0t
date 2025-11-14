@@ -1,36 +1,36 @@
-# Your 3 Git Commands (Simple & Clear!)
+# Your 3 Git Commands
 
 ## The Commands
 
-### 1. /commit-smarter-bot
+### 1. /commit-smarter-b0t
 **What it means:** Save MY custom work  
-**Where it goes:** YOUR smarter-bot branch  
+**Where it goes:** YOUR smarter-b0t branch  
 **When to use:** You made changes for yourself
 
 ```
-/commit-smarter-bot
+/commit-smarter-b0t
 ```
 
 ---
 
-### 2. /commit-bot
+### 2. /commit-b0t
 **What it means:** Give this to everyone  
 **Where it goes:** Feature branch → Pull Request → Original repo  
 **When to use:** You fixed something for the community
 
 ```
-/commit-bot
+/commit-b0t
 ```
 
 ---
 
-### 3. /sync-with-bot
-**What it means:** Get latest from original bot  
+### 3. /sync-with-b0t
+**What it means:** Get latest from original b0t  
 **Where it goes:** From KenKaiii/b0t → Your branches  
 **When to use:** You want newest updates from original
 
 ```
-/sync-with-bot
+/sync-with-b0t
 ```
 
 ---
@@ -39,9 +39,9 @@
 
 | Command | In Plain English |
 |---------|------------------|
-| `/commit-smarter-bot` | "Save my custom stuff" |
-| `/commit-bot` | "Share this with everyone" |
-| `/sync-with-bot` | "Get latest from KenKaiii" |
+| `/commit-smarter-b0t` | "Save my custom stuff" |
+| `/commit-b0t` | "Share this with everyone" |
+| `/sync-with-b0t` | "Get latest from KenKaiii" |
 
 ---
 
@@ -50,18 +50,18 @@
 ### You're working on YOUR features:
 ```
 *add custom dashboard*
-/commit-smarter-bot
+/commit-smarter-b0t
 ```
 
 ### You fixed a bug for EVERYONE:
 ```
 *fix login issue*
-/commit-bot
+/commit-b0t
 ```
 
-### Original bot got updated:
+### Original b0t got updated:
 ```
-/sync-with-bot
+/sync-with-b0t
 ```
 
 ---
@@ -70,9 +70,9 @@
 
 **Ask yourself:** "What am I doing?"
 
-- Saving MY work → `/commit-smarter-bot`
-- Sharing with EVERYONE → `/commit-bot`
-- Getting UPDATES → `/sync-with-bot`
+- Saving MY work → `/commit-smarter-b0t`
+- Sharing with EVERYONE → `/commit-b0t`
+- Getting UPDATES → `/sync-with-b0t`
 
 ---
 
@@ -80,21 +80,21 @@
 
 ```
 Monday:
-/sync-with-bot            ← Get latest from KenKaiii
+/sync-with-b0t            ← Get latest from KenKaiii
 *work*
-/commit-smarter-bot       ← Save my work
+/commit-smarter-b0t       ← Save my work
 
 Tuesday:
 *more work*
-/commit-smarter-bot       ← Save again
+/commit-smarter-b0t       ← Save again
 
 Wednesday:
 *fix bug*
-/commit-bot               ← Share with everyone
+/commit-b0t               ← Share with everyone
 
 Friday:
-/sync-with-bot            ← Get updates
-/commit-smarter-bot       ← Save week's work
+/sync-with-b0t            ← Get updates
+/commit-smarter-b0t       ← Save week's work
 ```
 
 ---
@@ -102,8 +102,8 @@ Friday:
 ## That's It!
 
 Three commands:
-1. `/commit-smarter-bot` - Save yours
-2. `/commit-bot` - Share with everyone
-3. `/sync-with-bot` - Get updates from original
+1. `/commit-smarter-b0t` - Save yours
+2. `/commit-b0t` - Share with everyone
+3. `/sync-with-b0t` - Get updates from original
 
-Simple and natural sounding.
+Matches the b0t repo name perfectly.

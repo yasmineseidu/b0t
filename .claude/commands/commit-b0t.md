@@ -1,5 +1,5 @@
 ---
-description: Contribute to the ORIGINAL bot repo
+description: Contribute to the ORIGINAL b0t repo
 ---
 
 Prepare a professional contribution to submit to KenKaiii/b0t (the original repo).
@@ -29,7 +29,7 @@ Prepare a professional contribution to submit to KenKaiii/b0t (the original repo
 
 ## Example:
 ```
-You: /commit-bot
+You: /commit-b0t
 
 Me:
 You're on main. Create feature branch.
