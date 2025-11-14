@@ -24,13 +24,13 @@
 
 ---
 
-### 3. /sync
-**What it means:** Get the latest version  
+### 3. /sync-with-b0t
+**What it means:** Get latest from original b0t  
 **Where it goes:** From KenKaiii/b0t → Your branches  
-**When to use:** You want newest updates
+**When to use:** You want newest updates from original
 
 ```
-/sync
+/sync-with-b0t
 ```
 
 ---
@@ -41,7 +41,7 @@
 |---------|------------------|
 | `/commit-smarter-b0t` | "Save my custom stuff" |
 | `/commit-b0t` | "Share this with everyone" |
-| `/sync` | "Get latest version" |
+| `/sync-with-b0t` | "Get latest from KenKaiii" |
 
 ---
 
@@ -59,20 +59,20 @@
 /commit-b0t
 ```
 
-### Original repo got updated:
+### Original b0t got updated:
 ```
-/sync
+/sync-with-b0t
 ```
 
 ---
 
 ## Decision Helper
 
-**Ask yourself:** "Is this for me or for everyone?"
+**Ask yourself:** "What am I doing?"
 
-- For ME → `/commit-smarter-b0t`
-- For EVERYONE → `/commit-b0t`
-- Get UPDATES → `/sync`
+- Saving MY work → `/commit-smarter-b0t`
+- Sharing with EVERYONE → `/commit-b0t`
+- Getting UPDATES → `/sync-with-b0t`
 
 ---
 
@@ -80,7 +80,7 @@
 
 ```
 Monday:
-/sync                      ← Get latest
+/sync-with-b0t            ← Get latest from KenKaiii
 *work*
 /commit-smarter-b0t       ← Save my work
 
@@ -93,7 +93,7 @@ Wednesday:
 /commit-b0t               ← Share with everyone
 
 Friday:
-/sync                      ← Get updates
+/sync-with-b0t            ← Get updates
 /commit-smarter-b0t       ← Save week's work
 ```
 
@@ -102,8 +102,8 @@ Friday:
 ## That's It!
 
 Three commands:
-1. `/commit-smarter-b0t` - Yours
-2. `/commit-b0t` - Everyone's
-3. `/sync` - Updates
+1. `/commit-smarter-b0t` - Save yours
+2. `/commit-b0t` - Share with everyone
+3. `/sync-with-b0t` - Get updates from original
 
 Simple and clear.

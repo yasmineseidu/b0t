@@ -30,14 +30,14 @@ Me: Creates feature branch, commits professionally, guides PR
 
 ---
 
-### /sync
-**What:** Get latest updates  
+### /sync-with-b0t
+**What:** Get latest updates from original b0t  
 **Where:** Pulls from KenKaiii/b0t → your branches  
-**Use when:** You want the newest version
+**Use when:** You want the newest version from original
 
 ```
-You: /sync
-Me: Updates your fork with latest from original
+You: /sync-with-b0t
+Me: Updates your fork with latest from KenKaiii/b0t
 ```
 
 ---
@@ -48,7 +48,7 @@ Me: Updates your fork with latest from original
 |---------|-------------------|---------|
 | `/commit-smarter-b0t` | "Save my custom stuff" | You added a feature for yourself |
 | `/commit-b0t` | "Give this to everyone" | You fixed a bug for the community |
-| `/sync` | "Get the latest version" | Original project released updates |
+| `/sync-with-b0t` | "Get latest from original" | KenKaiii released updates |
 
 ---
 
@@ -56,7 +56,7 @@ Me: Updates your fork with latest from original
 
 **Monday:**
 ```
-/sync
+/sync-with-b0t
 *work on your custom features*
 /commit-smarter-b0t
 ```
@@ -76,7 +76,7 @@ Me: Updates your fork with latest from original
 
 **Friday:**
 ```
-/sync
+/sync-with-b0t
 /commit-smarter-b0t
 ```
 
@@ -84,20 +84,20 @@ Me: Updates your fork with latest from original
 
 ## Quick Decision Tree
 
-**Ask yourself:** "Is this for me or for everyone?"
+**Ask yourself:** "What am I doing?"
 
 ```
-For ME (custom modifications)
+Made custom changes for ME
 ↓
 /commit-smarter-b0t
 
-For EVERYONE (bug fix, feature for original)
+Fixed something for EVERYONE
 ↓
 /commit-b0t
 
-Need UPDATES from original?
+Want UPDATES from KenKaiii/b0t?
 ↓
-/sync
+/sync-with-b0t
 ```
 
 ---
@@ -120,8 +120,8 @@ Need UPDATES from original?
 
 ### Scenario 3: Get Updates
 ```
-*original repo released v2.0*
-/sync
+*KenKaiii released v2.0*
+/sync-with-b0t
 → You now have v2.0 too
 ```
 
@@ -143,7 +143,7 @@ Need UPDATES from original?
 4. ✅ Pushes to YOUR fork
 5. ✅ Guides you to make PR
 
-### /sync
+### /sync-with-b0t
 1. ✅ Pulls from KenKaiii/b0t
 2. ✅ Updates your main
 3. ✅ Merges to smarter-b0t
@@ -156,8 +156,8 @@ Need UPDATES from original?
 
 ```
 Monday 9am:
-/sync
-→ Got latest updates
+/sync-with-b0t
+→ Got latest updates from KenKaiii
 
 Monday 2pm:
 *added custom feature*
@@ -176,8 +176,8 @@ Wednesday:
 → Created PR on GitHub
 
 Friday:
-/sync
-→ Got new updates
+/sync-with-b0t
+→ Got new updates from original
 /commit-smarter-b0t
 → Saved weekly progress
 ```
@@ -196,10 +196,10 @@ Friday:
 - Creates: Pull Request
 - Use: `/commit-b0t`
 
-**Getting updates:**
+**Getting updates from original:**
 - From: KenKaiii/b0t (original)
 - To: Your branches
-- Use: `/sync`
+- Use: `/sync-with-b0t`
 
 ---
 
@@ -207,8 +207,8 @@ Friday:
 
 Three commands. That's all you need.
 
-- `/commit-smarter-b0t` - Your stuff
-- `/commit-b0t` - Everyone's stuff
-- `/sync` - Get updates
+- `/commit-smarter-b0t` - Save your stuff
+- `/commit-b0t` - Share with everyone
+- `/sync-with-b0t` - Get updates from original
 
-Simple.
+Simple and clear.
