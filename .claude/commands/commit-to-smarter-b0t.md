@@ -11,19 +11,3 @@ description: Commit MY custom work to smarter-b0t branch
 6. Show message for approval
 7. Commit: `git commit -m "message"`
 8. Push: `git push origin smarter-b0t`
-
-## Example:
-```
-You: /commit-to-smarter-b0t
-
-Me:
-Found changes in: dashboard.js, api.js
-Proposed commit: "Add custom analytics dashboard"
-OK? (yes/no)
-
-You: yes
-
-Me:
-✅ Committed to smarter-b0t
-✅ Pushed to YOUR fork
-```
