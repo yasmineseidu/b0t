@@ -17,6 +17,7 @@ export * from './ai-sdk';
 export * from './ai-agent';
 export * from './ai-agent-stream';
 export * from './ai-tools';
+export * from './autobound';
 export * from './cohere';
 
 // Vector Databases

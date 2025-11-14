@@ -187,6 +187,23 @@ export function getModuleRegistry(): ModuleCategory[] {
           ],
         },
         {
+          name: 'autobound',
+          functions: [
+            {
+              name: 'generateContent',
+              description: "Generate hyper-personalized sales content (emails, call scripts, messages, etc.)",
+              signature: 'generateContent(options)',
+              example: "// Generate a personalized email\nconst result = await generateContent({\n  contactEmail: '[email protected]',\n  userEmail: '[email protected]',\n  contentType: 'email',\n  valueProposition: 'We help sales teams automate outreach',\n  writingStyle: 'challenger_sale'\n});\nconsole.log(result.contentList[0].subject);\nconsole.log(result.contentList[0].content);",
+            },
+            {
+              name: 'generateInsights',
+              description: "Generate relevant prospect insights from Autobound's database",
+              signature: 'generateInsights(options)',
+              example: "// Get all insights for a contact\nconst result = await generateInsights({\n  contactEmail: '[email protected]',\n  userEmail: '[email protected]'\n});\nconsole.log(result.insights);",
+            },
+          ],
+        },
+        {
           name: 'chroma',
           functions: [
             {

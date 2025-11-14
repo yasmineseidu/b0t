@@ -94,6 +94,22 @@ export const PLATFORM_CONFIGS: Record<string, PlatformConfig> = {
     ]
   },
 
+  autobound: {
+    id: 'autobound',
+    name: 'Autobound',
+    category: 'AI',
+    fields: [
+      {
+        key: 'api_key',
+        label: 'API Key',
+        type: 'password',
+        required: true,
+        placeholder: 'ab-...',
+        description: 'Your Autobound API key from app2.autobound.ai/settings/api-keys'
+      }
+    ]
+  },
+
   // ============================================
   // SOCIAL MEDIA
   // ============================================

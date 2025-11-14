@@ -19,6 +19,29 @@ description: Contribute to the ORIGINAL b0t repo
 - Features: `add-[feature]` (e.g., add-webhooks)
 - Improvements: `improve-[area]` (e.g., improve-docs)
 
+## Example:
+```
+You: /commit-to-b0t
+
+Me:
+You're on main. Create feature branch.
+Name? (e.g., fix-memory-leak)
+
+You: fix-login-bug
+
+Me:
+Created: fix-login-bug
+Found changes in: auth.js
+Proposed commit:
+"Fix login validation error handling"
+OK? (yes/no)
+
+You: yes
+
+Me:
+✅ Committed to fix-login-bug
+✅ Pushed to YOUR fork
+
 Next: Create PR at github.com/yasmineseidu/b0t
 Submit to: KenKaiii/b0t
 ```

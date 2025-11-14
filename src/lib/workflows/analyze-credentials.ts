@@ -337,6 +337,7 @@ const PLATFORM_CAPABILITIES: Record<string, PlatformCapability> = {
   // AI Platforms
   'openai': { category: 'api_key' },
   'anthropic': { category: 'api_key' },
+  'autobound': { category: 'api_key' },
   'cohere': { category: 'api_key' },
   'huggingface': { category: 'api_key' },
   'replicate': { category: 'api_key' },
@@ -754,6 +755,7 @@ export function getPlatformDisplayName(platform: string): string {
     // AI
     openai: 'OpenAI',
     anthropic: 'Anthropic',
+    autobound: 'Autobound',
     cohere: 'Cohere',
     huggingface: 'Hugging Face',
     replicate: 'Replicate',
@@ -846,6 +848,7 @@ export function getPlatformIcon(platform: string): string {
     // AI
     openai: 'Sparkles',
     anthropic: 'Zap',
+    autobound: 'Mail',
     cohere: 'Sparkles',
     huggingface: 'Brain',
     replicate: 'Copy',
