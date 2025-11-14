@@ -1,33 +1,33 @@
 # ALL SET! Your Final Commands
 
-Everything is committed to your smarter-b0t branch. Here are your 3 commands:
+Everything is committed. Here are your 3 simple commands:
 
 ---
 
 ## Your Commands
 
-### /commit-smarter-b0t
+### /commit-smarter-bot
 **Save YOUR custom work**
 ```
-/commit-smarter-b0t
+/commit-smarter-bot
 ```
 Use when: You made changes to your version
 
 ---
 
-### /commit-b0t
+### /commit-bot
 **Share with everyone**
 ```
-/commit-b0t
+/commit-bot
 ```
 Use when: You want to contribute to original
 
 ---
 
-### /sync-with-b0t
+### /sync-with-bot
 **Get latest from original**
 ```
-/sync-with-b0t
+/sync-with-bot
 ```
 Use when: You want updates from KenKaiii/b0t
 
@@ -37,42 +37,27 @@ Use when: You want updates from KenKaiii/b0t
 
 | Do This | Type This |
 |---------|-----------|
-| Save my work | `/commit-smarter-b0t` |
-| Share with all | `/commit-b0t` |
-| Get updates | `/sync-with-b0t` |
+| Save my work | `/commit-smarter-bot` |
+| Share with all | `/commit-bot` |
+| Get updates | `/sync-with-bot` |
 
 ---
 
 ## Or Use Natural Language
 
 Instead of typing commands, just talk:
-- "commit my changes" → same as `/commit-smarter-b0t`
-- "contribute this back" → same as `/commit-b0t`
-- "sync from original" → same as `/sync-with-b0t`
-
----
-
-## Everything Committed ✅
-
-Latest commit: **a4e6cc5**
-
-What's in this commit:
-- Renamed /sync to /sync-with-b0t (clearer!)
-- Reorganized skills folder
-- Updated all docs
-
-Your project: `~/Desktop/Coding/smarter-b0t/`  
-Current branch: `smarter-b0t`  
-Status: Clean ✅
+- "commit my changes" → same as `/commit-smarter-bot`
+- "contribute this back" → same as `/commit-bot`
+- "sync from original" → same as `/sync-with-bot`
 
 ---
 
 ## Try It Now!
 
 Type one of these:
-- `/commit-smarter-b0t`
-- `/commit-b0t`
-- `/sync-with-b0t`
+- `/commit-smarter-bot`
+- `/commit-bot`
+- `/sync-with-bot`
 
 Or just tell me:
 - "commit my changes"
