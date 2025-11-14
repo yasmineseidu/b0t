@@ -1,160 +1,214 @@
-# Slash Commands for Smarter-b0t
+# Git Slash Commands - Simple & Clear
 
-Quick-access commands for git operations. Type the command and execute.
-
-## Available Commands
-
-### /commit-custom
-**Usage:** `/commit-custom`
-
-Commit your custom work to smarter-b0t branch.
-
-**When:** After making changes to your custom version
-
-**Does:**
-- Analyzes your changes
-- Creates clear commit message
-- Commits and pushes to YOUR fork
-- Shows confirmation
+Three simple commands for all your git needs.
 
 ---
 
-### /sync-original
-**Usage:** `/sync-original`
+## The 3 Commands
 
-Sync your fork with the original KenKaiii/b0t repo.
+### /commit-smarter-b0t
+**What:** Save YOUR custom work  
+**Where:** smarter-b0t branch (YOUR version)  
+**Use when:** You made changes to your custom version
 
-**When:** Weekly, or when you want latest updates
-
-**Does:**
-- Pulls from KenKaiii/b0t
-- Updates your main branch
-- Merges into smarter-b0t
-- Handles conflicts
-- Keeps everything current
+```
+You: /commit-smarter-b0t
+Me: Commits and pushes to YOUR smarter-b0t branch
+```
 
 ---
 
-### /contribute
-**Usage:** `/contribute`
+### /commit-b0t
+**What:** Contribute to ORIGINAL project  
+**Where:** Feature branch → Pull Request  
+**Use when:** You want to give back to KenKaiii/b0t
 
-Prepare a contribution to submit back to original repo.
-
-**When:** You fixed a bug or added a feature to contribute
-
-**Does:**
-- Creates feature branch
-- Writes professional commit
-- Pushes to your fork
-- Guides you through PR creation
+```
+You: /commit-b0t
+Me: Creates feature branch, commits professionally, guides PR
+```
 
 ---
 
-## Quick Reference
+### /sync
+**What:** Get latest updates  
+**Where:** Pulls from KenKaiii/b0t → your branches  
+**Use when:** You want the newest version
 
-| Command | What It Does | When To Use |
-|---------|-------------|-------------|
-| `/commit-custom` | Save your custom work | After making changes |
-| `/sync-original` | Get latest from original | Weekly updates |
-| `/contribute` | Prepare contribution | Submitting fixes/features |
+```
+You: /sync
+Me: Updates your fork with latest from original
+```
+
+---
+
+## Super Simple Breakdown
+
+| Command | Think Of It As... | Example |
+|---------|-------------------|---------|
+| `/commit-smarter-b0t` | "Save my custom stuff" | You added a feature for yourself |
+| `/commit-b0t` | "Give this to everyone" | You fixed a bug for the community |
+| `/sync` | "Get the latest version" | Original project released updates |
+
+---
+
+## Daily Workflow
+
+**Monday:**
+```
+/sync
+*work on your custom features*
+/commit-smarter-b0t
+```
+
+**Tuesday:**
+```
+*more custom work*
+/commit-smarter-b0t
+```
+
+**Wednesday:**
+```
+*you fixed a bug that helps everyone*
+/commit-b0t
+*create PR on GitHub*
+```
+
+**Friday:**
+```
+/sync
+/commit-smarter-b0t
+```
+
+---
+
+## Quick Decision Tree
+
+**Ask yourself:** "Is this for me or for everyone?"
+
+```
+For ME (custom modifications)
+↓
+/commit-smarter-b0t
+
+For EVERYONE (bug fix, feature for original)
+↓
+/commit-b0t
+
+Need UPDATES from original?
+↓
+/sync
+```
 
 ---
 
 ## Examples
 
-### Daily Work:
+### Scenario 1: Custom Feature
 ```
-*make changes*
-/commit-custom
-```
-
-### Get Updates:
-```
-/sync-original
+*you add a custom dashboard*
+/commit-smarter-b0t
+→ Saves to YOUR version only
 ```
 
-### Contribute Back:
+### Scenario 2: Bug Fix
 ```
-*fix a bug*
-/contribute
-```
-
----
-
-## Commands vs Skills
-
-**Slash Commands** (`/command`):
-- Direct and explicit
-- Type the command to execute
-- Faster for frequent operations
-
-**Skills** (natural language):
-- Conversational
-- Say "commit my changes"
-- More intuitive
-
-Both do the same thing - use whichever you prefer!
-
----
-
-## Workflow Examples
-
-### Example 1: Daily Development
-```
-Day 1:
-/sync-original
-*code custom features*
-/commit-custom
-
-Day 2:
-*more work*
-/commit-custom
-
-Day 3:
-/sync-original
-/commit-custom
+*you fix the login bug*
+/commit-b0t
+→ Creates PR to give to everyone
 ```
 
-### Example 2: Contributing
+### Scenario 3: Get Updates
 ```
-/sync-original
-*fix a bug*
-/contribute
-*create PR on GitHub*
-```
-
-### Example 3: Multiple Sessions
-```
-Morning:
-/sync-original
-*work*
-/commit-custom
-
-Afternoon:
-*more work*
-/commit-custom
-
-Evening:
-/commit-custom
+*original repo released v2.0*
+/sync
+→ You now have v2.0 too
 ```
 
 ---
 
-## Tips
+## What Each Command Does
 
-1. **Use /sync-original weekly** - Stay current with original repo
-2. **Use /commit-custom often** - Small commits are better
-3. **Use /contribute for PRs** - Professional contributions
-4. **They're safe** - All commands ask before destructive operations
+### /commit-smarter-b0t
+1. ✅ Checks you're on smarter-b0t branch
+2. ✅ Analyzes your changes
+3. ✅ Creates commit message
+4. ✅ Pushes to YOUR fork
+5. ✅ Done
+
+### /commit-b0t
+1. ✅ Creates feature branch
+2. ✅ Analyzes your changes
+3. ✅ Writes professional commit
+4. ✅ Pushes to YOUR fork
+5. ✅ Guides you to make PR
+
+### /sync
+1. ✅ Pulls from KenKaiii/b0t
+2. ✅ Updates your main
+3. ✅ Merges to smarter-b0t
+4. ✅ Handles conflicts
+5. ✅ Done
 
 ---
 
-## All Your Git Options
+## Complete Example Week
 
-| Method | Example | Best For |
-|--------|---------|----------|
-| Slash Command | `/commit-custom` | Quick execution |
-| Natural Language | "commit my changes" | Conversational |
-| Manual Git | `git add . && git commit` | When you want control |
+```
+Monday 9am:
+/sync
+→ Got latest updates
 
-Pick whichever feels natural!
+Monday 2pm:
+*added custom feature*
+/commit-smarter-b0t
+→ Saved my work
+
+Tuesday:
+*more custom work*
+/commit-smarter-b0t
+→ Saved again
+
+Wednesday:
+*noticed a bug, fixed it*
+/commit-b0t
+→ Contributing back
+→ Created PR on GitHub
+
+Friday:
+/sync
+→ Got new updates
+/commit-smarter-b0t
+→ Saved weekly progress
+```
+
+---
+
+## Remember
+
+**Your custom work:**
+- Goes to: smarter-b0t branch
+- Stays on: YOUR fork
+- Use: `/commit-smarter-b0t`
+
+**Contributing to everyone:**
+- Goes to: Feature branch
+- Creates: Pull Request
+- Use: `/commit-b0t`
+
+**Getting updates:**
+- From: KenKaiii/b0t (original)
+- To: Your branches
+- Use: `/sync`
+
+---
+
+## That's It!
+
+Three commands. That's all you need.
+
+- `/commit-smarter-b0t` - Your stuff
+- `/commit-b0t` - Everyone's stuff
+- `/sync` - Get updates
+
+Simple.
