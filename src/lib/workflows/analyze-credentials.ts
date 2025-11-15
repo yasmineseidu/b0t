@@ -347,6 +347,7 @@ const PLATFORM_CAPABILITIES: Record<string, PlatformCapability> = {
   'resend': { category: 'api_key' },
   'sendgrid': { category: 'api_key' },
   'twilio': { category: 'api_key' },
+  'instantly': { category: 'api_key' }, // Instantly.ai uses API key
 
   // Data
   'mongodb': { category: 'api_key' }, // Connection string
@@ -767,6 +768,7 @@ export function getPlatformDisplayName(platform: string): string {
     resend: 'Resend',
     sendgrid: 'SendGrid',
     twilio: 'Twilio',
+    instantly: 'Instantly.ai',
 
     // Data
     mongodb: 'MongoDB',
@@ -860,6 +862,7 @@ export function getPlatformIcon(platform: string): string {
     resend: 'Mail',
     sendgrid: 'Mail',
     twilio: 'Phone',
+    instantly: 'Mail',
 
     // Data
     mongodb: 'Database',

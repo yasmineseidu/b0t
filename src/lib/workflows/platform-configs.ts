@@ -323,6 +323,22 @@ export const PLATFORM_CONFIGS: Record<string, PlatformConfig> = {
     ]
   },
 
+  instantly: {
+    id: 'instantly',
+    name: 'Instantly.ai',
+    category: 'Communication',
+    fields: [
+      {
+        key: 'api_key',
+        label: 'API Key',
+        type: 'password',
+        required: true,
+        placeholder: 'inst-...',
+        description: 'Your Instantly.ai API key from app.instantly.ai/app/settings/integrations'
+      }
+    ]
+  },
+
   google_oauth_app: {
     id: 'google_oauth_app',
     name: 'Google OAuth App Credentials',
