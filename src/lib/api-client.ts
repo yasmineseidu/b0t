@@ -12,7 +12,7 @@
  * - Reduces code duplication across 40+ components
  */
 
-import { logger } from './logger';
+import { logger } from './logger-client';
 
 export class APIError extends Error {
   constructor(
