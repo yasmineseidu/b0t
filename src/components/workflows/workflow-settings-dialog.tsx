@@ -24,7 +24,7 @@ import { CronTriggerConfig } from './trigger-configs/cron-trigger-config';
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { getModelIdsByProvider, getDefaultModel, fetchOpenRouterModels, type AIProvider } from '@/lib/ai-models';
-import { logger } from '@/lib/logger';
+import { logger } from '@/lib/logger-client';
 
 interface WorkflowSettingsDialogProps {
   workflowId: string;

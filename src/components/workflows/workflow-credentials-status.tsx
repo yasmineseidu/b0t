@@ -18,7 +18,7 @@ import {
 } from '@/components/ui/popover';
 import { toast } from 'sonner';
 import { getIcon } from '@/lib/icon-map';
-import { logger } from '@/lib/logger';
+import { logger } from '@/lib/logger-client';
 
 interface OAuthAccount {
   id: string;

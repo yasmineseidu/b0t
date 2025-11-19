@@ -15,7 +15,7 @@ import { showTwitter403Error, showTwitter429Error, showApiError, showTwitterSucc
 import { NEWS_TOPICS, NEWS_LANGUAGES, NEWS_COUNTRIES } from '@/modules/external-apis/rapidapi/newsapi/constants';
 import { Command, CommandGroup, CommandItem, CommandList } from '@/components/ui/command';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { logger } from '@/lib/logger';
+import { logger } from '@/lib/logger-client';
 
 interface WorkflowTileProps {
   title: string;

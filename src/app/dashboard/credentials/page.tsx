@@ -17,7 +17,9 @@ import { CredentialListItem } from '@/types/workflows';
 import { useClient } from '@/components/providers/ClientProvider';
 import { useSearchParams } from 'next/navigation';
 import { toast } from 'sonner';
-import { logger } from '@/lib/logger';
+import { logger } from '@/lib/logger-client';
+
+export const dynamic = 'force-dynamic';
 
 export default function CredentialsPage() {
   const { currentClient } = useClient();

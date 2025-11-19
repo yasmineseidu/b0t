@@ -17,7 +17,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { logger } from '@/lib/logger';
+import { logger } from '@/lib/logger-client';
 
 interface WebhookTriggerConfigProps {
   workflowId: string;

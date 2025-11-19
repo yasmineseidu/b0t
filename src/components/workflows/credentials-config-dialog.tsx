@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/dialog';
 import { Skeleton } from '@/components/ui/skeleton';
 import { WorkflowCredentialsStatus } from './workflow-credentials-status';
-import { logger } from '@/lib/logger';
+import { logger } from '@/lib/logger-client';
 
 interface CredentialsConfigDialogProps {
   workflowId: string;

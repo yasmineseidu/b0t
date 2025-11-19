@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { logger } from '@/lib/logger';
+import { logger } from '@/lib/logger-client';
 
 export const dynamic = 'force-dynamic';
 export const dynamicParams = true;

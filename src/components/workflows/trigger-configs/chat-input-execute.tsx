@@ -19,7 +19,7 @@ import {
 import { Check, ChevronsUpDown } from 'lucide-react';
 import { toast } from 'sonner';
 import { InputField } from './chat-input-trigger-config';
-import { logger } from '@/lib/logger';
+import { logger } from '@/lib/logger-client';
 
 interface ChatInputExecuteProps {
   workflowId: string;

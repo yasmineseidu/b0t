@@ -30,7 +30,7 @@ import { Label } from '@/components/ui/label';
 import { WorkflowListItem } from '@/types/workflows';
 import { toast } from 'sonner';
 import { useClient } from '@/components/providers/ClientProvider';
-import { logger } from '@/lib/logger';
+import { logger } from '@/lib/logger-client';
 
 // Fetcher function for workflows
 const workflowsFetcher = async (url: string) => {

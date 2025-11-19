@@ -10,7 +10,7 @@ import {
   CollapsibleTrigger,
 } from '@/components/ui/collapsible';
 import { Copy, Check, ExternalLink, ChevronDown } from 'lucide-react';
-import { logger } from '@/lib/logger';
+import { logger } from '@/lib/logger-client';
 
 interface TelegramTriggerConfigProps {
   initialConfig?: Record<string, unknown>;

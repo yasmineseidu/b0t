@@ -18,6 +18,16 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: false,
   },
 
+  // Disable static optimization to prevent prerendering errors
+  // This is necessary because we use client-side features (useSearchParams, etc.)
+  experimental: {
+    skipMiddlewareUrlNormalize: false,
+  },
+
+  // Don't generate static pages for routes that require runtime (like error pages)
+  // This prevents build errors from trying to prerender dynamic pages
+  staticPageGenerationTimeout: 120,
+
   // Exclude packages with native dependencies from webpack bundling
   // This fixes build errors with discord.js and other native modules
   // Note: ioredis and bullmq are NOT in this list to avoid Turbopack conflicts
@@ -36,6 +46,8 @@ const nextConfig: NextConfig = {
     '@node-rs/argon2',
     '@node-rs/bcrypt',
     'pdf-parse',
+    'pino',
+    'pino-pretty',
   ],
 
   // Configure webpack to ignore native modules and optional dependencies

@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Loader2, UserPlus } from 'lucide-react';
 import { toast } from 'sonner';
 import Link from 'next/link';
-import { logger } from '@/lib/logger';
+import { logger } from '@/lib/logger-client';
 
 function RegisterForm() {
   const router = useRouter();

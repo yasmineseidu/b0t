@@ -17,7 +17,7 @@ import {
   flexRender,
   type ColumnDef,
 } from '@tanstack/react-table';
-import { logger } from '@/lib/logger';
+import { logger } from '@/lib/logger-client';
 import { formatDuration, formatDate } from '@/lib/format-utils';
 
 interface WorkflowRun {

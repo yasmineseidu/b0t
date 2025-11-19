@@ -14,7 +14,7 @@ import {
   type ColumnDef,
 } from '@tanstack/react-table';
 import { formatDuration, formatRelativeTime } from '@/lib/format-utils';
-import { logger } from '@/lib/logger';
+import { logger } from '@/lib/logger-client';
 
 interface JobLog {
   id: number;

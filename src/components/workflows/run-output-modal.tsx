@@ -12,7 +12,7 @@ import { OutputRenderer } from './output-renderer';
 import { OutputDisplayConfig } from '@/lib/workflows/analyze-output-display';
 import { useState, useEffect } from 'react';
 import { ChatInterface } from './chat-interface';
-import { logger } from '@/lib/logger';
+import { logger } from '@/lib/logger-client';
 
 interface WorkflowRun {
   id: string;

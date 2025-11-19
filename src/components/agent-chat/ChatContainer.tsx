@@ -6,7 +6,7 @@ import { MessageList } from './MessageList';
 import { ChatInput } from './ChatInput';
 import { Sidebar } from './Sidebar';
 import { ModelSelector } from './ModelSelector';
-import { logger } from '@/lib/logger';
+import { logger } from '@/lib/logger-client';
 
 interface ContentBlock {
   type: 'text' | 'tool_use';

@@ -17,7 +17,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
 import { formatDate } from '@/lib/format-utils';
-import { logger } from '@/lib/logger';
+import { logger } from '@/lib/logger-client';
 
 interface WorkflowCardProps {
   workflow: WorkflowListItem;

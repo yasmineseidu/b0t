@@ -19,7 +19,7 @@ import { DiscordTriggerConfig } from './trigger-configs/discord-trigger-config';
 import { ChatInputTriggerConfig } from './trigger-configs/chat-input-trigger-config';
 import { GmailTriggerConfig } from './trigger-configs/gmail-trigger-config';
 import { OutlookTriggerConfig } from './trigger-configs/outlook-trigger-config';
-import { logger } from '@/lib/logger';
+import { logger } from '@/lib/logger-client';
 
 interface TriggerConfigDialogProps {
   workflowId: string;

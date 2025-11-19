@@ -25,7 +25,7 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { Users, Plus, Trash2, Mail, ChevronsUpDown, Check } from 'lucide-react';
 import { toast } from 'sonner';
-import { logger } from '@/lib/logger';
+import { logger } from '@/lib/logger-client';
 
 interface Member {
   id: string;

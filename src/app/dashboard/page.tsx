@@ -8,7 +8,7 @@ import { CheckCircle2, XCircle, Play, Building2, Users } from 'lucide-react';
 import { AnimatedCounter } from '@/components/ui/animated-counter';
 import { useClient } from '@/components/providers/ClientProvider';
 import { ProductTour } from '@/components/layout/ProductTour';
-import { logger } from '@/lib/logger';
+import { logger } from '@/lib/logger-client';
 import { StatusIcon } from '@/components/ui/status-icon';
 import { formatDuration, formatRelativeTime } from '@/lib/format-utils';
 

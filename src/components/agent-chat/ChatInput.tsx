@@ -2,7 +2,7 @@
 
 import React, { useRef, useEffect, useState } from 'react';
 import { Send, Square } from 'lucide-react';
-import { logger } from '@/lib/logger';
+import { logger } from '@/lib/logger-client';
 
 interface SlashCommand {
   name: string;

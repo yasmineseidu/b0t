@@ -20,7 +20,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Switch } from '@/components/ui/switch';
 import { Badge } from '@/components/ui/badge';
 import { toast } from 'sonner';
-import { logger } from '@/lib/logger';
+import { logger } from '@/lib/logger-client';
 
 // Lazy load heavy components
 const ClientMembersDialog = lazy(() => import('@/components/clients/client-members-dialog').then(mod => ({ default: mod.ClientMembersDialog })));

@@ -13,7 +13,7 @@ import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { toast } from 'sonner';
 import dynamic from 'next/dynamic';
-import { logger } from '@/lib/logger';
+import { logger } from '@/lib/logger-client';
 
 const ReactJson = dynamic(() => import('@microlink/react-json-view'), { ssr: false });
 

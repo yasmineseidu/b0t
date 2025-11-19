@@ -24,7 +24,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Heart, Repeat2, MessageCircle, Eye, ArrowUpDown, ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
 import { NoRepliesState, LoadingState } from '@/components/ui/empty-state';
-import { logger } from '@/lib/logger';
+import { logger } from '@/lib/logger-client';
 import { formatDate, formatNumber } from '@/lib/format-utils';
 
 interface TweetReply {

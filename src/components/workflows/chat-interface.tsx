@@ -10,7 +10,7 @@ import { Send, User, Bot, Loader2, Maximize2, Minimize2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
-import { logger } from '@/lib/logger';
+import { logger } from '@/lib/logger-client';
 
 // Animation constants to avoid creating new objects on each render
 const MESSAGE_ANIMATION_INITIAL = { opacity: 0, y: 10 };

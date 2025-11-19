@@ -11,7 +11,7 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { Clock, CheckCircle2, XCircle } from 'lucide-react';
 import { OutputRenderer } from './output-renderer';
-import { logger } from '@/lib/logger';
+import { logger } from '@/lib/logger-client';
 import { formatDuration, formatDate } from '@/lib/format-utils';
 
 interface WorkflowRun {

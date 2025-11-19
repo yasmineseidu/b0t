@@ -24,7 +24,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ArrowUpDown, ChevronLeft, ChevronRight, ExternalLink, FileText } from 'lucide-react';
 import { LoadingState } from '@/components/ui/empty-state';
-import { logger } from '@/lib/logger';
+import { logger } from '@/lib/logger-client';
 import { formatDate } from '@/lib/format-utils';
 
 interface PostedThread {

@@ -8,7 +8,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { logger } from '@/lib/logger';
+import { logger } from '@/lib/logger-client';
 
 type SystemStatus = 'cold' | 'warming' | 'warm' | 'hot';
 
