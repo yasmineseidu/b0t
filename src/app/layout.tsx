@@ -42,6 +42,7 @@ export default function RootLayout({
     <html lang="en" data-scroll-behavior="smooth">
       <body
         className={`${interHeading.variable} ${interBody.variable} ${inter.variable} antialiased`}
+        suppressHydrationWarning
       >
         <AppLoader />
         <ErrorBoundary>

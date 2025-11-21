@@ -2,7 +2,7 @@
  * Instantly.ai API Client with Reliability Infrastructure
  *
  * Instantly.ai is a cold email outreach platform for B2B sales and marketing.
- * This module provides campaign management, lead management, email management (Unibox), and analytics.
+ * This module provides campaign management, lead management, email management (Unibox), analytics, and account management.
  *
  * Features:
  * - Circuit breaker to prevent hammering failing API
@@ -11,9 +11,15 @@
  * - Automatic error handling
  *
  * Supported Operations:
- * - Campaigns: Create, list, get, update, delete, activate, pause, search by contact (8 endpoints)
- * - Leads: Add, get, update, delete, list, merge, update interest status, remove from subsequence (8 endpoints)
+ * - Campaigns: Create, list, get, update, delete, activate, pause, search by contact, duplicate, stop for lead, launched count (11 endpoints)
+ * - Leads: Add, get, update, delete, list, merge, update interest status, remove from subsequence, bulk assign, move, add to subsequence, bulk add (12 endpoints)
+ * - Email Verification: Verify email, get verification result (2 endpoints)
+ * - Lead Lists: Create, list, get, update, delete, get verification stats (6 endpoints)
  * - Emails (Unibox): Reply, forward, list, get, update, delete, get unread count, mark thread as read (8 endpoints)
+ * - Analytics: Warmup analytics, test vitals, campaign analytics, overview, daily, steps (6 endpoints)
+ * - Accounts: Create, list, get, update, delete, enable/disable warmup, fix, delete multiple, update tracking domain (10 endpoints)
+ *
+ * Total: 55 endpoints
  *
  * API Documentation: https://developer.instantly.ai/
  *
@@ -88,6 +94,21 @@ export interface SearchCampaignByContactOptions {
   email: string;
 }
 
+export interface DuplicateCampaignOptions {
+  apiKey: string;
+  campaignId: string;
+}
+
+export interface StopCampaignForLeadOptions {
+  apiKey: string;
+  campaignId: string;
+  leadId: string;
+}
+
+export interface GetLaunchedCountOptions {
+  apiKey: string;
+}
+
 // Lead Types
 export interface Lead {
   id: string;
@@ -151,6 +172,117 @@ export interface RemoveLeadFromSubsequenceOptions {
   apiKey: string;
   leadId: string;
   campaignId: string;
+}
+
+export interface BulkAssignLeadsOptions {
+  apiKey: string;
+  leadIds: string[]; // Array of lead UUIDs to assign
+  organizationUserIds: string[]; // Array of organization user IDs to assign leads to
+  campaignId?: string; // Optional campaign filter
+}
+
+export interface MoveLeadsOptions {
+  apiKey: string;
+  leadIds: string[]; // Array of lead UUIDs to move
+  campaignId?: string; // Campaign ID to move to
+  listId?: string; // Lead list ID to move to
+}
+
+export interface AddLeadToSubsequenceOptions {
+  apiKey: string;
+  leadId: string; // Lead UUID
+  campaignId: string; // Campaign ID
+  subsequenceId: string; // Subsequence/step ID to add lead to
+}
+
+export interface BulkAddLeadsOptions {
+  apiKey: string;
+  campaignId?: string; // Campaign ID to add leads to
+  listId?: string; // Lead list ID to add leads to
+  leads: Array<{
+    email: string;
+    first_name?: string;
+    last_name?: string;
+    company?: string;
+    [key: string]: unknown;
+  }>;
+}
+
+// Email Verification Types
+export interface VerifyEmailOptions {
+  apiKey: string;
+  email: string; // Email address to verify
+}
+
+export interface GetEmailVerificationOptions {
+  apiKey: string;
+  email: string; // Email address to get verification result for
+}
+
+export interface EmailVerificationResult {
+  email: string;
+  status: 'valid' | 'invalid' | 'risky' | 'unknown';
+  is_disposable?: boolean;
+  is_role_account?: boolean;
+  is_free_email?: boolean;
+  smtp_valid?: boolean;
+  [key: string]: unknown;
+}
+
+// Lead List Types
+export interface LeadList {
+  id: string;
+  name: string;
+  created_at?: string;
+  updated_at?: string;
+  lead_count?: number;
+  [key: string]: unknown;
+}
+
+export interface CreateLeadListOptions {
+  apiKey: string;
+  name: string;
+  description?: string;
+  [key: string]: unknown;
+}
+
+export interface ListLeadListsOptions {
+  apiKey: string;
+  limit?: number;
+  offset?: number;
+}
+
+export interface GetLeadListOptions {
+  apiKey: string;
+  listId: string;
+}
+
+export interface UpdateLeadListOptions {
+  apiKey: string;
+  listId: string;
+  name?: string;
+  description?: string;
+  [key: string]: unknown;
+}
+
+export interface DeleteLeadListOptions {
+  apiKey: string;
+  listId: string;
+}
+
+export interface GetLeadListVerificationStatsOptions {
+  apiKey: string;
+  listId: string;
+}
+
+export interface LeadListVerificationStats {
+  total_leads: number;
+  verified_count: number;
+  valid_count: number;
+  invalid_count: number;
+  risky_count: number;
+  unknown_count: number;
+  [key: string]: unknown;
 }
 
 // Email Types (Unibox)
@@ -231,6 +363,114 @@ export interface GetUnreadCountOptions {
 export interface MarkThreadAsReadOptions {
   apiKey: string;
   threadId: string;
+}
+
+// Analytics Types
+export interface WarmupAnalyticsOptions {
+  apiKey: string;
+  emails: string[]; // Array of email addresses to get warmup analytics for
+  [key: string]: unknown;
+}
+
+export interface TestVitalsOptions {
+  apiKey: string;
+  email: string; // Email account to test
+  [key: string]: unknown;
+}
+
+export interface GetCampaignAnalyticsOptions {
+  apiKey: string;
+  campaignId: string;
+}
+
+export interface GetCampaignAnalyticsOverviewOptions {
+  apiKey: string;
+  campaignId: string;
+}
+
+export interface GetCampaignAnalyticsDailyOptions {
+  apiKey: string;
+  campaignId: string;
+  startDate?: string; // ISO date format
+  endDate?: string; // ISO date format
+}
+
+export interface GetCampaignAnalyticsStepsOptions {
+  apiKey: string;
+  campaignId: string;
+}
+
+// Account Types
+export interface Account {
+  email: string;
+  name?: string;
+  status?: string;
+  warmup_enabled?: boolean;
+  daily_limit?: number;
+  [key: string]: unknown;
+}
+
+export interface CreateAccountOptions {
+  apiKey: string;
+  email: string;
+  first_name: string; // Required by API
+  last_name: string; // Required by API
+  provider_code: number; // Required by API (numeric code for email provider)
+  smtp_host: string; // Required by API
+  smtp_port: number; // Required by API
+  smtp_username: string; // Required by API
+  smtp_password: string; // Required by API
+  imap_host: string; // Required by API
+  imap_port: number; // Required by API
+  imap_username: string; // Required by API
+  imap_password: string; // Required by API
+  [key: string]: unknown;
+}
+
+export interface ListAccountsOptions {
+  apiKey: string;
+  limit?: number;
+  offset?: number;
+}
+
+export interface GetAccountOptions {
+  apiKey: string;
+  email: string;
+}
+
+export interface UpdateAccountOptions {
+  apiKey: string;
+  email: string;
+  daily_limit?: number;
+  warmup_enabled?: boolean;
+  [key: string]: unknown;
+}
+
+export interface DeleteAccountOptions {
+  apiKey: string;
+  email: string;
+}
+
+export interface WarmupActionOptions {
+  apiKey: string;
+  email: string;
+}
+
+export interface FixAccountsOptions {
+  apiKey: string;
+  emails: string[]; // Array of email addresses to mark as fixed
+}
+
+export interface DeleteMultipleAccountsOptions {
+  apiKey: string;
+  emails: string[]; // Array of email addresses to delete
+}
+
+export interface UpdateCustomTrackingDomainOptions {
+  apiKey: string;
+  email: string; // Account email
+  custom_tracking_domain?: string; // Custom tracking domain to set
+  [key: string]: unknown;
 }
 
 // Response Types
@@ -490,6 +730,67 @@ async function searchCampaignByContactInternal(
   return response;
 }
 
+/**
+ * Internal implementation of duplicateCampaign
+ */
+async function duplicateCampaignInternal(
+  options: DuplicateCampaignOptions
+): Promise<InstantlyResponse<Campaign>> {
+  const { apiKey, campaignId } = options;
+
+  logger.info({ campaignId }, 'Duplicating Instantly.ai campaign');
+
+  const response = await instantlyRequest<Campaign>(
+    `/campaigns/${campaignId}/duplicate`,
+    'POST',
+    apiKey
+  );
+
+  logger.info({ campaignId, newCampaignId: response.data?.id }, 'Campaign duplicated');
+  return response;
+}
+
+/**
+ * Internal implementation of stopCampaignForLead
+ */
+async function stopCampaignForLeadInternal(
+  options: StopCampaignForLeadOptions
+): Promise<InstantlyResponse> {
+  const { apiKey, campaignId, leadId } = options;
+
+  logger.info({ campaignId, leadId }, 'Stopping campaign for specific lead');
+
+  const response = await instantlyRequest(
+    `/campaigns/${campaignId}/stop-for-lead`,
+    'POST',
+    apiKey,
+    { lead_id: leadId }
+  );
+
+  logger.info({ campaignId, leadId }, 'Campaign stopped for lead');
+  return response;
+}
+
+/**
+ * Internal implementation of getLaunchedCount
+ */
+async function getLaunchedCountInternal(
+  options: GetLaunchedCountOptions
+): Promise<InstantlyResponse<{ count: number }>> {
+  const { apiKey } = options;
+
+  logger.info('Getting launched campaigns count');
+
+  const response = await instantlyRequest<{ count: number }>(
+    '/campaigns/launched-count',
+    'GET',
+    apiKey
+  );
+
+  logger.info({ count: response.data?.count }, 'Launched campaigns count retrieved');
+  return response;
+}
+
 // ============================================================================
 // LEAD FUNCTIONS (INTERNAL)
 // ============================================================================
@@ -682,6 +983,390 @@ async function removeLeadFromSubsequenceInternal(
 
   logger.info({ leadId, campaignId }, 'Lead removed from subsequence');
   return response;
+}
+
+/**
+ * Internal implementation of bulkAssignLeads
+ */
+async function bulkAssignLeadsInternal(
+  options: BulkAssignLeadsOptions
+): Promise<InstantlyResponse> {
+  const { apiKey, leadIds, organizationUserIds, campaignId } = options;
+
+  logger.info({ leadCount: leadIds.length, userCount: organizationUserIds.length }, 'Bulk assigning leads to users');
+
+  const requestBody: Record<string, unknown> = {
+    lead_ids: leadIds,
+    organization_user_ids: organizationUserIds,
+  };
+
+  if (campaignId) {
+    requestBody.campaign_id = campaignId;
+  }
+
+  const response = await instantlyRequest(
+    `/leads/bulk-assign`,
+    'POST',
+    apiKey,
+    requestBody
+  );
+
+  logger.info({ leadCount: leadIds.length, userCount: organizationUserIds.length }, 'Leads bulk assigned');
+  return response;
+}
+
+/**
+ * Internal implementation of moveLeads
+ */
+async function moveLeadsInternal(
+  options: MoveLeadsOptions
+): Promise<InstantlyResponse> {
+  const { apiKey, leadIds, campaignId, listId } = options;
+
+  logger.info({ leadCount: leadIds.length, campaignId, listId }, 'Moving leads');
+
+  const requestBody: Record<string, unknown> = {
+    lead_ids: leadIds,
+  };
+
+  // API expects to_campaign_id or to_list_id
+  if (campaignId) requestBody.to_campaign_id = campaignId;
+  if (listId) requestBody.to_list_id = listId;
+
+  const response = await instantlyRequest(
+    `/leads/move`,
+    'POST',
+    apiKey,
+    requestBody
+  );
+
+  logger.info({ leadCount: leadIds.length }, 'Leads moved');
+  return response;
+}
+
+/**
+ * Internal implementation of addLeadToSubsequence
+ */
+async function addLeadToSubsequenceInternal(
+  options: AddLeadToSubsequenceOptions
+): Promise<InstantlyResponse> {
+  const { apiKey, leadId, campaignId, subsequenceId } = options;
+
+  logger.info({ leadId, campaignId, subsequenceId }, 'Adding lead to subsequence');
+
+  const response = await instantlyRequest(
+    `/leads/subsequence/add`,
+    'POST',
+    apiKey,
+    {
+      id: leadId,
+      campaign_id: campaignId,
+      subsequence_id: subsequenceId,
+    }
+  );
+
+  logger.info({ leadId, subsequenceId }, 'Lead added to subsequence');
+  return response;
+}
+
+/**
+ * Internal implementation of bulkAddLeads
+ */
+async function bulkAddLeadsInternal(
+  options: BulkAddLeadsOptions
+): Promise<InstantlyResponse> {
+  const { apiKey, campaignId, listId, leads } = options;
+
+  logger.info({ leadCount: leads.length, campaignId, listId }, 'Bulk adding leads');
+
+  const requestBody: Record<string, unknown> = {
+    leads,
+  };
+
+  if (campaignId) requestBody.campaign_id = campaignId;
+  if (listId) requestBody.list_id = listId;
+
+  const response = await instantlyRequest(
+    `/leads/bulk-add`,
+    'POST',
+    apiKey,
+    requestBody
+  );
+
+  logger.info({ leadCount: leads.length }, 'Leads bulk added');
+  return response;
+}
+
+// ============================================================================
+// EMAIL VERIFICATION FUNCTIONS (INTERNAL)
+// ============================================================================
+
+/**
+ * Internal implementation of verifyEmail
+ */
+async function verifyEmailInternal(
+  options: VerifyEmailOptions
+): Promise<EmailVerificationResult> {
+  const { apiKey, email } = options;
+
+  logger.info({ email }, 'Verifying email address');
+
+  // This endpoint returns data directly, not wrapped
+  const url = `${INSTANTLY_API_BASE}/email-verification`;
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ email }),
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    logger.error({ status: response.status, error: errorText }, 'Email verification failed');
+    throw new Error(`Instantly.ai API error (${response.status}): ${errorText}`);
+  }
+
+  const data = await response.json() as EmailVerificationResult & { verification_status?: string };
+
+  // Map verification_status to status for consistency
+  if (data.verification_status && !data.status) {
+    data.status = data.verification_status as 'valid' | 'invalid' | 'risky' | 'unknown';
+  }
+
+  logger.info({ email, status: data.status }, 'Email verified');
+  return data;
+}
+
+/**
+ * Internal implementation of getEmailVerification
+ */
+async function getEmailVerificationInternal(
+  options: GetEmailVerificationOptions
+): Promise<EmailVerificationResult> {
+  const { apiKey, email } = options;
+
+  logger.info({ email }, 'Getting email verification result');
+
+  // This endpoint returns data directly, not wrapped
+  const url = `${INSTANTLY_API_BASE}/email-verification/${encodeURIComponent(email)}`;
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${apiKey}`,
+    },
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    logger.error({ status: response.status, error: errorText }, 'Get email verification failed');
+    throw new Error(`Instantly.ai API error (${response.status}): ${errorText}`);
+  }
+
+  const data = await response.json() as EmailVerificationResult & { verification_status?: string };
+
+  // Map verification_status to status for consistency
+  if (data.verification_status && !data.status) {
+    data.status = data.verification_status as 'valid' | 'invalid' | 'risky' | 'unknown';
+  }
+
+  logger.info({ email, status: data.status }, 'Email verification result retrieved');
+  return data;
+}
+
+// ============================================================================
+// LEAD LIST FUNCTIONS (INTERNAL)
+// ============================================================================
+
+/**
+ * Internal implementation of createLeadList
+ */
+async function createLeadListInternal(
+  options: CreateLeadListOptions
+): Promise<LeadList> {
+  const { apiKey, ...listData } = options;
+
+  logger.info({ name: listData.name }, 'Creating lead list');
+
+  // This endpoint returns data directly, not wrapped
+  const url = `${INSTANTLY_API_BASE}/lead-lists`;
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(listData),
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    logger.error({ status: response.status, error: errorText }, 'Create lead list failed');
+    throw new Error(`Instantly.ai API error (${response.status}): ${errorText}`);
+  }
+
+  const data = await response.json() as LeadList;
+  logger.info({ listId: data.id }, 'Lead list created');
+  return data;
+}
+
+/**
+ * Internal implementation of listLeadLists
+ */
+async function listLeadListsInternal(
+  options: ListLeadListsOptions
+): Promise<{ items: LeadList[]; next_starting_after?: string }> {
+  const { apiKey, limit, offset } = options;
+
+  logger.info({ limit, offset }, 'Listing lead lists');
+
+  // Build endpoint with query parameters
+  let endpoint = '/lead-lists';
+  const params = [];
+  if (limit !== undefined) params.push(`limit=${limit}`);
+  if (offset !== undefined) params.push(`starting_after=${offset}`);
+  if (params.length > 0) endpoint += `?${params.join('&')}`;
+
+  // This endpoint returns {items: [...], next_starting_after: "..."} directly
+  const url = `${INSTANTLY_API_BASE}${endpoint}`;
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${apiKey}`,
+    },
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    logger.error({ status: response.status, error: errorText }, 'List lead lists failed');
+    throw new Error(`Instantly.ai API error (${response.status}): ${errorText}`);
+  }
+
+  const data = await response.json() as { items: LeadList[]; next_starting_after?: string };
+  logger.info({ count: data.items?.length || 0 }, 'Lead lists retrieved');
+  return data;
+}
+
+/**
+ * Internal implementation of getLeadList
+ */
+async function getLeadListInternal(
+  options: GetLeadListOptions
+): Promise<LeadList> {
+  const { apiKey, listId } = options;
+
+  logger.info({ listId }, 'Getting lead list details');
+
+  // This endpoint returns data directly, not wrapped
+  const url = `${INSTANTLY_API_BASE}/lead-lists/${listId}`;
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${apiKey}`,
+    },
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    logger.error({ status: response.status, error: errorText }, 'Get lead list failed');
+    throw new Error(`Instantly.ai API error (${response.status}): ${errorText}`);
+  }
+
+  const data = await response.json() as LeadList;
+  logger.info({ listId }, 'Lead list retrieved');
+  return data;
+}
+
+/**
+ * Internal implementation of updateLeadList
+ */
+async function updateLeadListInternal(
+  options: UpdateLeadListOptions
+): Promise<LeadList> {
+  const { apiKey, listId, ...updateData } = options;
+
+  logger.info({ listId }, 'Updating lead list');
+
+  // This endpoint returns data directly, not wrapped
+  const url = `${INSTANTLY_API_BASE}/lead-lists/${listId}`;
+  const response = await fetch(url, {
+    method: 'PATCH',
+    headers: {
+      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(updateData),
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    logger.error({ status: response.status, error: errorText }, 'Update lead list failed');
+    throw new Error(`Instantly.ai API error (${response.status}): ${errorText}`);
+  }
+
+  const data = await response.json() as LeadList;
+  logger.info({ listId }, 'Lead list updated');
+  return data;
+}
+
+/**
+ * Internal implementation of deleteLeadList
+ */
+async function deleteLeadListInternal(
+  options: DeleteLeadListOptions
+): Promise<{ success: boolean }> {
+  const { apiKey, listId } = options;
+
+  logger.info({ listId }, 'Deleting lead list');
+
+  // This endpoint returns data directly, not wrapped
+  const url = `${INSTANTLY_API_BASE}/lead-lists/${listId}`;
+  const response = await fetch(url, {
+    method: 'DELETE',
+    headers: {
+      'Authorization': `Bearer ${apiKey}`,
+    },
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    logger.error({ status: response.status, error: errorText }, 'Delete lead list failed');
+    throw new Error(`Instantly.ai API error (${response.status}): ${errorText}`);
+  }
+
+  logger.info({ listId }, 'Lead list deleted');
+  return { success: true };
+}
+
+/**
+ * Internal implementation of getLeadListVerificationStats
+ */
+async function getLeadListVerificationStatsInternal(
+  options: GetLeadListVerificationStatsOptions
+): Promise<LeadListVerificationStats> {
+  const { apiKey, listId } = options;
+
+  logger.info({ listId }, 'Getting lead list verification stats');
+
+  // This endpoint returns data directly, not wrapped
+  const url = `${INSTANTLY_API_BASE}/lead-lists/${listId}/verification-stats`;
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${apiKey}`,
+    },
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    logger.error({ status: response.status, error: errorText }, 'Get verification stats failed');
+    throw new Error(`Instantly.ai API error (${response.status}): ${errorText}`);
+  }
+
+  const data = await response.json() as LeadListVerificationStats;
+  logger.info({ listId }, 'Lead list verification stats retrieved');
+  return data;
 }
 
 // ============================================================================
@@ -910,6 +1595,348 @@ async function markThreadAsReadInternal(
 }
 
 // ============================================================================
+// ANALYTICS FUNCTIONS (INTERNAL)
+// ============================================================================
+
+/**
+ * Internal implementation of getWarmupAnalytics
+ */
+async function getWarmupAnalyticsInternal(
+  options: WarmupAnalyticsOptions
+): Promise<InstantlyResponse> {
+  const { apiKey, ...requestData } = options;
+
+  logger.info('Getting warmup analytics');
+
+  const response = await instantlyRequest(
+    '/accounts/warmup-analytics',
+    'POST',
+    apiKey,
+    requestData
+  );
+
+  logger.info('Warmup analytics retrieved');
+  return response;
+}
+
+/**
+ * Internal implementation of testVitals
+ */
+async function testVitalsInternal(
+  options: TestVitalsOptions
+): Promise<InstantlyResponse> {
+  const { apiKey, email, ...requestData } = options;
+
+  logger.info({ email }, 'Testing account vitals');
+
+  const response = await instantlyRequest(
+    '/accounts/test/vitals',
+    'POST',
+    apiKey,
+    { email, ...requestData }
+  );
+
+  logger.info({ email }, 'Account vitals test completed');
+  return response;
+}
+
+/**
+ * Internal implementation of getCampaignAnalytics
+ */
+async function getCampaignAnalyticsInternal(
+  options: GetCampaignAnalyticsOptions
+): Promise<InstantlyResponse> {
+  const { apiKey, campaignId } = options;
+
+  logger.info({ campaignId }, 'Getting campaign analytics');
+
+  const response = await instantlyRequest(
+    `/campaigns/analytics?campaign_id=${encodeURIComponent(campaignId)}`,
+    'GET',
+    apiKey
+  );
+
+  logger.info({ campaignId }, 'Campaign analytics retrieved');
+  return response;
+}
+
+/**
+ * Internal implementation of getCampaignAnalyticsOverview
+ */
+async function getCampaignAnalyticsOverviewInternal(
+  options: GetCampaignAnalyticsOverviewOptions
+): Promise<InstantlyResponse> {
+  const { apiKey, campaignId } = options;
+
+  logger.info({ campaignId }, 'Getting campaign analytics overview');
+
+  const response = await instantlyRequest(
+    `/campaigns/analytics/overview?campaign_id=${encodeURIComponent(campaignId)}`,
+    'GET',
+    apiKey
+  );
+
+  logger.info({ campaignId }, 'Campaign analytics overview retrieved');
+  return response;
+}
+
+/**
+ * Internal implementation of getCampaignAnalyticsDaily
+ */
+async function getCampaignAnalyticsDailyInternal(
+  options: GetCampaignAnalyticsDailyOptions
+): Promise<InstantlyResponse> {
+  const { apiKey, campaignId, startDate, endDate } = options;
+
+  logger.info({ campaignId, startDate, endDate }, 'Getting daily campaign analytics');
+
+  let endpoint = `/campaigns/analytics/daily?campaign_id=${encodeURIComponent(campaignId)}`;
+  if (startDate) endpoint += `&start_date=${encodeURIComponent(startDate)}`;
+  if (endDate) endpoint += `&end_date=${encodeURIComponent(endDate)}`;
+
+  const response = await instantlyRequest(endpoint, 'GET', apiKey);
+
+  logger.info({ campaignId }, 'Daily campaign analytics retrieved');
+  return response;
+}
+
+/**
+ * Internal implementation of getCampaignAnalyticsSteps
+ */
+async function getCampaignAnalyticsStepsInternal(
+  options: GetCampaignAnalyticsStepsOptions
+): Promise<InstantlyResponse> {
+  const { apiKey, campaignId } = options;
+
+  logger.info({ campaignId }, 'Getting campaign analytics by steps');
+
+  const response = await instantlyRequest(
+    `/campaigns/analytics/steps?campaign_id=${encodeURIComponent(campaignId)}`,
+    'GET',
+    apiKey
+  );
+
+  logger.info({ campaignId }, 'Campaign analytics steps retrieved');
+  return response;
+}
+
+// ============================================================================
+// ACCOUNT FUNCTIONS (INTERNAL)
+// ============================================================================
+
+/**
+ * Internal implementation of createAccount
+ */
+async function createAccountInternal(
+  options: CreateAccountOptions
+): Promise<InstantlyResponse<Account>> {
+  const { apiKey, ...accountData } = options;
+
+  logger.info({ email: accountData.email }, 'Creating email account');
+
+  const response = await instantlyRequest<Account>(
+    '/accounts',
+    'POST',
+    apiKey,
+    accountData
+  );
+
+  logger.info({ email: accountData.email }, 'Email account created');
+  return response;
+}
+
+/**
+ * Internal implementation of listAccounts
+ */
+async function listAccountsInternal(
+  options: ListAccountsOptions
+): Promise<InstantlyResponse<Account[]>> {
+  const { apiKey, limit, offset } = options;
+
+  logger.info({ limit, offset }, 'Listing email accounts');
+
+  let endpoint = '/accounts';
+  const params = [];
+  if (limit) params.push(`limit=${limit}`);
+  if (offset) params.push(`offset=${offset}`);
+  if (params.length > 0) endpoint += `?${params.join('&')}`;
+
+  const response = await instantlyRequest<Account[]>(endpoint, 'GET', apiKey);
+
+  logger.info(
+    { count: Array.isArray(response.data) ? response.data.length : 0 },
+    'Email accounts listed'
+  );
+  return response;
+}
+
+/**
+ * Internal implementation of getAccount
+ */
+async function getAccountInternal(
+  options: GetAccountOptions
+): Promise<InstantlyResponse<Account>> {
+  const { apiKey, email } = options;
+
+  logger.info({ email }, 'Getting email account details');
+
+  const response = await instantlyRequest<Account>(
+    `/accounts/${encodeURIComponent(email)}`,
+    'GET',
+    apiKey
+  );
+
+  logger.info({ email }, 'Email account retrieved');
+  return response;
+}
+
+/**
+ * Internal implementation of updateAccount
+ */
+async function updateAccountInternal(
+  options: UpdateAccountOptions
+): Promise<InstantlyResponse<Account>> {
+  const { apiKey, email, ...updateData } = options;
+
+  logger.info({ email }, 'Updating email account');
+
+  const response = await instantlyRequest<Account>(
+    `/accounts/${encodeURIComponent(email)}`,
+    'PATCH',
+    apiKey,
+    updateData
+  );
+
+  logger.info({ email }, 'Email account updated');
+  return response;
+}
+
+/**
+ * Internal implementation of deleteAccount
+ */
+async function deleteAccountInternal(
+  options: DeleteAccountOptions
+): Promise<InstantlyResponse> {
+  const { apiKey, email } = options;
+
+  logger.info({ email }, 'Deleting email account');
+
+  const response = await instantlyRequest(
+    `/accounts/${encodeURIComponent(email)}`,
+    'DELETE',
+    apiKey
+  );
+
+  logger.info({ email }, 'Email account deleted');
+  return response;
+}
+
+/**
+ * Internal implementation of enableWarmup
+ */
+async function enableWarmupInternal(
+  options: WarmupActionOptions
+): Promise<InstantlyResponse> {
+  const { apiKey, email } = options;
+
+  logger.info({ email }, 'Enabling warmup for account');
+
+  const response = await instantlyRequest(
+    '/accounts/warmup/enable',
+    'POST',
+    apiKey,
+    { email }
+  );
+
+  logger.info({ email }, 'Warmup enabled');
+  return response;
+}
+
+/**
+ * Internal implementation of disableWarmup
+ */
+async function disableWarmupInternal(
+  options: WarmupActionOptions
+): Promise<InstantlyResponse> {
+  const { apiKey, email } = options;
+
+  logger.info({ email }, 'Disabling warmup for account');
+
+  const response = await instantlyRequest(
+    '/accounts/warmup/disable',
+    'POST',
+    apiKey,
+    { email }
+  );
+
+  logger.info({ email }, 'Warmup disabled');
+  return response;
+}
+
+/**
+ * Internal implementation of fixAccounts
+ */
+async function fixAccountsInternal(
+  options: FixAccountsOptions
+): Promise<InstantlyResponse> {
+  const { apiKey, emails } = options;
+
+  logger.info({ count: emails.length }, 'Marking accounts as fixed');
+
+  const response = await instantlyRequest(
+    '/accounts/fix',
+    'POST',
+    apiKey,
+    { emails }
+  );
+
+  logger.info({ count: emails.length }, 'Accounts marked as fixed');
+  return response;
+}
+
+/**
+ * Internal implementation of deleteMultipleAccounts
+ */
+async function deleteMultipleAccountsInternal(
+  options: DeleteMultipleAccountsOptions
+): Promise<InstantlyResponse> {
+  const { apiKey, emails } = options;
+
+  logger.info({ count: emails.length }, 'Deleting multiple accounts');
+
+  const response = await instantlyRequest(
+    '/accounts/delete-multiple',
+    'POST',
+    apiKey,
+    { emails }
+  );
+
+  logger.info({ count: emails.length }, 'Multiple accounts deleted');
+  return response;
+}
+
+/**
+ * Internal implementation of updateCustomTrackingDomain
+ */
+async function updateCustomTrackingDomainInternal(
+  options: UpdateCustomTrackingDomainOptions
+): Promise<InstantlyResponse> {
+  const { apiKey, email, ...updateData } = options;
+
+  logger.info({ email }, 'Updating custom tracking domain');
+
+  const response = await instantlyRequest(
+    '/accounts/update-custom-tracking-domain',
+    'POST',
+    apiKey,
+    { email, ...updateData }
+  );
+
+  logger.info({ email }, 'Custom tracking domain updated');
+  return response;
+}
+
+// ============================================================================
 // PROTECTED EXPORTS (WITH CIRCUIT BREAKER + RATE LIMITING)
 // ============================================================================
 
@@ -1100,6 +2127,73 @@ const searchCampaignByContactWithBreaker = createCircuitBreaker(
 export const searchCampaignByContact = withRateLimit(
   (options: SearchCampaignByContactOptions) =>
     searchCampaignByContactWithBreaker.fire(options),
+  rateLimiter
+);
+
+const duplicateCampaignWithBreaker = createCircuitBreaker(duplicateCampaignInternal, {
+  timeout: 15000,
+  name: 'instantly.duplicateCampaign',
+});
+
+/**
+ * Duplicate an existing campaign with all its settings
+ *
+ * @param options - Campaign ID to duplicate
+ * @returns New campaign object with duplicated settings
+ *
+ * @example
+ * const result = await duplicateCampaign({
+ *   apiKey: 'your-api-key',
+ *   campaignId: 'camp_123456'
+ * });
+ */
+export const duplicateCampaign = withRateLimit(
+  (options: DuplicateCampaignOptions) => duplicateCampaignWithBreaker.fire(options),
+  rateLimiter
+);
+
+const stopCampaignForLeadWithBreaker = createCircuitBreaker(stopCampaignForLeadInternal, {
+  timeout: 15000,
+  name: 'instantly.stopCampaignForLead',
+});
+
+/**
+ * Stop a campaign for a specific lead
+ *
+ * @param options - Campaign ID and lead ID
+ * @returns Success response
+ *
+ * @example
+ * const result = await stopCampaignForLead({
+ *   apiKey: 'your-api-key',
+ *   campaignId: 'camp_123456',
+ *   leadId: '019a861c-5abb-76fb-a399-6c551d19c0cf'
+ * });
+ */
+export const stopCampaignForLead = withRateLimit(
+  (options: StopCampaignForLeadOptions) => stopCampaignForLeadWithBreaker.fire(options),
+  rateLimiter
+);
+
+const getLaunchedCountWithBreaker = createCircuitBreaker(getLaunchedCountInternal, {
+  timeout: 15000,
+  name: 'instantly.getLaunchedCount',
+});
+
+/**
+ * Get the count of launched (active) campaigns
+ *
+ * @param options - API key
+ * @returns Object with count of launched campaigns
+ *
+ * @example
+ * const result = await getLaunchedCount({
+ *   apiKey: 'your-api-key'
+ * });
+ * console.log(`You have ${result.data.count} launched campaigns`);
+ */
+export const getLaunchedCount = withRateLimit(
+  (options: GetLaunchedCountOptions) => getLaunchedCountWithBreaker.fire(options),
   rateLimiter
 );
 
@@ -1306,6 +2400,312 @@ export const removeLeadFromSubsequence = withRateLimit(
   rateLimiter
 );
 
+const bulkAssignLeadsWithBreaker = createCircuitBreaker(bulkAssignLeadsInternal, {
+  timeout: 15000,
+  name: 'instantly.bulkAssignLeads',
+});
+
+/**
+ * Bulk assign multiple leads to organization users
+ *
+ * @param options - Array of lead IDs, array of organization user IDs, and optional campaign filter
+ * @returns Success response
+ *
+ * @example
+ * const result = await bulkAssignLeads({
+ *   apiKey: 'your-api-key',
+ *   leadIds: ['019a861c-5abb-76fb-a399-6c551d19c0cf', '019a861c-5ff5-7c3c-88be-2269f99ed8d5'],
+ *   organizationUserIds: ['org_user_123', 'org_user_456'],
+ *   campaignId: 'camp_123456'
+ * });
+ */
+export const bulkAssignLeads = withRateLimit(
+  (options: BulkAssignLeadsOptions) => bulkAssignLeadsWithBreaker.fire(options),
+  rateLimiter
+);
+
+const moveLeadsWithBreaker = createCircuitBreaker(moveLeadsInternal, {
+  timeout: 15000,
+  name: 'instantly.moveLeads',
+});
+
+/**
+ * Move multiple leads to a different campaign or lead list
+ *
+ * @param options - Array of lead IDs and destination campaign or list
+ * @returns Success response
+ *
+ * @example
+ * // Move leads to a campaign
+ * const result = await moveLeads({
+ *   apiKey: 'your-api-key',
+ *   leadIds: ['019a861c-5abb-76fb-a399-6c551d19c0cf', '019a861c-5ff5-7c3c-88be-2269f99ed8d5'],
+ *   campaignId: 'camp_789012'
+ * });
+ *
+ * // Move leads to a list
+ * const result = await moveLeads({
+ *   apiKey: 'your-api-key',
+ *   leadIds: ['019a861c-5abb-76fb-a399-6c551d19c0cf'],
+ *   listId: 'list_456789'
+ * });
+ */
+export const moveLeads = withRateLimit(
+  (options: MoveLeadsOptions) => moveLeadsWithBreaker.fire(options),
+  rateLimiter
+);
+
+const addLeadToSubsequenceWithBreaker = createCircuitBreaker(addLeadToSubsequenceInternal, {
+  timeout: 15000,
+  name: 'instantly.addLeadToSubsequence',
+});
+
+/**
+ * Add a lead to a specific subsequence/step in a campaign
+ *
+ * @param options - Lead ID, campaign ID, and subsequence ID
+ * @returns Success response
+ *
+ * @example
+ * const result = await addLeadToSubsequence({
+ *   apiKey: 'your-api-key',
+ *   leadId: '019a861c-5abb-76fb-a399-6c551d19c0cf',
+ *   campaignId: 'camp_123456',
+ *   subsequenceId: 'subseq_789012'
+ * });
+ */
+export const addLeadToSubsequence = withRateLimit(
+  (options: AddLeadToSubsequenceOptions) => addLeadToSubsequenceWithBreaker.fire(options),
+  rateLimiter
+);
+
+const bulkAddLeadsWithBreaker = createCircuitBreaker(bulkAddLeadsInternal, {
+  timeout: 15000,
+  name: 'instantly.bulkAddLeads',
+});
+
+/**
+ * Add multiple leads in bulk to a campaign or lead list
+ *
+ * @param options - Array of lead objects and destination campaign or list
+ * @returns Success response
+ *
+ * @example
+ * // Add leads to a campaign
+ * const result = await bulkAddLeads({
+ *   apiKey: 'your-api-key',
+ *   campaignId: 'camp_123456',
+ *   leads: [
+ *     { email: 'lead1@example.com', first_name: 'John', last_name: 'Doe', company: 'Acme Corp' },
+ *     { email: 'lead2@example.com', first_name: 'Jane', last_name: 'Smith', company: 'Tech Inc' }
+ *   ]
+ * });
+ *
+ * // Add leads to a list
+ * const result = await bulkAddLeads({
+ *   apiKey: 'your-api-key',
+ *   listId: 'list_456789',
+ *   leads: [
+ *     { email: 'lead3@example.com', first_name: 'Bob', company: 'StartupXYZ' }
+ *   ]
+ * });
+ */
+export const bulkAddLeads = withRateLimit(
+  (options: BulkAddLeadsOptions) => bulkAddLeadsWithBreaker.fire(options),
+  rateLimiter
+);
+
+// Email Verification Functions
+const verifyEmailWithBreaker = createCircuitBreaker(verifyEmailInternal, {
+  timeout: 15000,
+  name: 'instantly.verifyEmail',
+});
+
+/**
+ * Verify a single email address for deliverability and validity
+ *
+ * @param options - Email address to verify
+ * @returns Email verification result with status and details
+ *
+ * @example
+ * const result = await verifyEmail({
+ *   apiKey: 'your-api-key',
+ *   email: 'prospect@example.com'
+ * });
+ * console.log(`Email status: ${result.data.status}`);
+ * console.log(`Is disposable: ${result.data.is_disposable}`);
+ */
+export const verifyEmail = withRateLimit(
+  (options: VerifyEmailOptions) => verifyEmailWithBreaker.fire(options),
+  rateLimiter
+);
+
+const getEmailVerificationWithBreaker = createCircuitBreaker(getEmailVerificationInternal, {
+  timeout: 15000,
+  name: 'instantly.getEmailVerification',
+});
+
+/**
+ * Get the verification result for a previously verified email
+ *
+ * @param options - Email address to get verification result for
+ * @returns Cached email verification result
+ *
+ * @example
+ * const result = await getEmailVerification({
+ *   apiKey: 'your-api-key',
+ *   email: 'prospect@example.com'
+ * });
+ */
+export const getEmailVerification = withRateLimit(
+  (options: GetEmailVerificationOptions) => getEmailVerificationWithBreaker.fire(options),
+  rateLimiter
+);
+
+// Lead List Functions
+const createLeadListWithBreaker = createCircuitBreaker(createLeadListInternal, {
+  timeout: 15000,
+  name: 'instantly.createLeadList',
+});
+
+/**
+ * Create a new lead list to organize your prospects
+ *
+ * @param options - List name and optional description
+ * @returns Created lead list object with ID
+ *
+ * @example
+ * const result = await createLeadList({
+ *   apiKey: 'your-api-key',
+ *   name: 'Q1 2025 Prospects',
+ *   description: 'High-priority leads for Q1 outreach'
+ * });
+ */
+export const createLeadList = withRateLimit(
+  (options: CreateLeadListOptions) => createLeadListWithBreaker.fire(options),
+  rateLimiter
+);
+
+const listLeadListsWithBreaker = createCircuitBreaker(listLeadListsInternal, {
+  timeout: 15000,
+  name: 'instantly.listLeadLists',
+});
+
+/**
+ * List all lead lists in your account
+ *
+ * @param options - Pagination parameters
+ * @returns Array of lead list objects
+ *
+ * @example
+ * const result = await listLeadLists({
+ *   apiKey: 'your-api-key',
+ *   limit: 50,
+ *   offset: 0
+ * });
+ */
+export const listLeadLists = withRateLimit(
+  (options: ListLeadListsOptions) => listLeadListsWithBreaker.fire(options),
+  rateLimiter
+);
+
+const getLeadListWithBreaker = createCircuitBreaker(getLeadListInternal, {
+  timeout: 15000,
+  name: 'instantly.getLeadList',
+});
+
+/**
+ * Get details of a specific lead list
+ *
+ * @param options - Lead list ID
+ * @returns Lead list object with full details
+ *
+ * @example
+ * const result = await getLeadList({
+ *   apiKey: 'your-api-key',
+ *   listId: 'list_123456'
+ * });
+ */
+export const getLeadList = withRateLimit(
+  (options: GetLeadListOptions) => getLeadListWithBreaker.fire(options),
+  rateLimiter
+);
+
+const updateLeadListWithBreaker = createCircuitBreaker(updateLeadListInternal, {
+  timeout: 15000,
+  name: 'instantly.updateLeadList',
+});
+
+/**
+ * Update a lead list's name or description
+ *
+ * @param options - List ID and fields to update
+ * @returns Updated lead list object
+ *
+ * @example
+ * const result = await updateLeadList({
+ *   apiKey: 'your-api-key',
+ *   listId: 'list_123456',
+ *   name: 'Updated List Name',
+ *   description: 'New description'
+ * });
+ */
+export const updateLeadList = withRateLimit(
+  (options: UpdateLeadListOptions) => updateLeadListWithBreaker.fire(options),
+  rateLimiter
+);
+
+const deleteLeadListWithBreaker = createCircuitBreaker(deleteLeadListInternal, {
+  timeout: 15000,
+  name: 'instantly.deleteLeadList',
+});
+
+/**
+ * Delete a lead list permanently
+ *
+ * @param options - Lead list ID to delete
+ * @returns Success response
+ *
+ * @example
+ * const result = await deleteLeadList({
+ *   apiKey: 'your-api-key',
+ *   listId: 'list_123456'
+ * });
+ */
+export const deleteLeadList = withRateLimit(
+  (options: DeleteLeadListOptions) => deleteLeadListWithBreaker.fire(options),
+  rateLimiter
+);
+
+const getLeadListVerificationStatsWithBreaker = createCircuitBreaker(
+  getLeadListVerificationStatsInternal,
+  {
+    timeout: 15000,
+    name: 'instantly.getLeadListVerificationStats',
+  }
+);
+
+/**
+ * Get email verification statistics for all leads in a list
+ *
+ * @param options - Lead list ID
+ * @returns Verification statistics including valid, invalid, risky counts
+ *
+ * @example
+ * const result = await getLeadListVerificationStats({
+ *   apiKey: 'your-api-key',
+ *   listId: 'list_123456'
+ * });
+ * console.log(`Total leads: ${result.data.total_leads}`);
+ * console.log(`Valid: ${result.data.valid_count}`);
+ * console.log(`Invalid: ${result.data.invalid_count}`);
+ */
+export const getLeadListVerificationStats = withRateLimit(
+  (options: GetLeadListVerificationStatsOptions) =>
+    getLeadListVerificationStatsWithBreaker.fire(options),
+  rateLimiter
+);
+
 // Email Functions (Unibox)
 const replyEmailWithBreaker = createCircuitBreaker(replyEmailInternal, {
   timeout: 15000,
@@ -1503,5 +2903,392 @@ const markThreadAsReadWithBreaker = createCircuitBreaker(markThreadAsReadInterna
  */
 export const markThreadAsRead = withRateLimit(
   (options: MarkThreadAsReadOptions) => markThreadAsReadWithBreaker.fire(options),
+  rateLimiter
+);
+
+// Analytics Functions
+const getWarmupAnalyticsWithBreaker = createCircuitBreaker(getWarmupAnalyticsInternal, {
+  timeout: 15000,
+  name: 'instantly.getWarmupAnalytics',
+});
+
+/**
+ * Get warmup analytics for email accounts
+ *
+ * @param options - API key and array of email addresses
+ * @returns Warmup analytics data for specified email accounts
+ *
+ * @example
+ * const result = await getWarmupAnalytics({
+ *   apiKey: 'your-api-key',
+ *   emails: ['sender@example.com', 'sales@company.com']
+ * });
+ */
+export const getWarmupAnalytics = withRateLimit(
+  (options: WarmupAnalyticsOptions) => getWarmupAnalyticsWithBreaker.fire(options),
+  rateLimiter
+);
+
+const testVitalsWithBreaker = createCircuitBreaker(testVitalsInternal, {
+  timeout: 15000,
+  name: 'instantly.testVitals',
+});
+
+/**
+ * Test account vitals to verify email deliverability and health
+ *
+ * @param options - Email account to test
+ * @returns Vitals test results
+ *
+ * @example
+ * const result = await testVitals({
+ *   apiKey: 'your-api-key',
+ *   email: 'sender@example.com'
+ * });
+ */
+export const testVitals = withRateLimit(
+  (options: TestVitalsOptions) => testVitalsWithBreaker.fire(options),
+  rateLimiter
+);
+
+const getCampaignAnalyticsWithBreaker = createCircuitBreaker(getCampaignAnalyticsInternal, {
+  timeout: 15000,
+  name: 'instantly.getCampaignAnalytics',
+});
+
+/**
+ * Get comprehensive analytics for a specific campaign
+ *
+ * @param options - Campaign ID and API key
+ * @returns Campaign analytics including opens, clicks, replies, bounces
+ *
+ * @example
+ * const result = await getCampaignAnalytics({
+ *   apiKey: 'your-api-key',
+ *   campaignId: 'camp_123456'
+ * });
+ */
+export const getCampaignAnalytics = withRateLimit(
+  (options: GetCampaignAnalyticsOptions) => getCampaignAnalyticsWithBreaker.fire(options),
+  rateLimiter
+);
+
+const getCampaignAnalyticsOverviewWithBreaker = createCircuitBreaker(
+  getCampaignAnalyticsOverviewInternal,
+  {
+    timeout: 15000,
+    name: 'instantly.getCampaignAnalyticsOverview',
+  }
+);
+
+/**
+ * Get overview analytics for a campaign with summary metrics
+ *
+ * @param options - Campaign ID and API key
+ * @returns Campaign analytics overview with key performance indicators
+ *
+ * @example
+ * const result = await getCampaignAnalyticsOverview({
+ *   apiKey: 'your-api-key',
+ *   campaignId: 'camp_123456'
+ * });
+ */
+export const getCampaignAnalyticsOverview = withRateLimit(
+  (options: GetCampaignAnalyticsOverviewOptions) =>
+    getCampaignAnalyticsOverviewWithBreaker.fire(options),
+  rateLimiter
+);
+
+const getCampaignAnalyticsDailyWithBreaker = createCircuitBreaker(
+  getCampaignAnalyticsDailyInternal,
+  {
+    timeout: 15000,
+    name: 'instantly.getCampaignAnalyticsDaily',
+  }
+);
+
+/**
+ * Get daily analytics breakdown for a campaign
+ *
+ * @param options - Campaign ID, optional date range
+ * @returns Daily analytics data
+ *
+ * @example
+ * const result = await getCampaignAnalyticsDaily({
+ *   apiKey: 'your-api-key',
+ *   campaignId: 'camp_123456',
+ *   startDate: '2025-01-01',
+ *   endDate: '2025-01-31'
+ * });
+ */
+export const getCampaignAnalyticsDaily = withRateLimit(
+  (options: GetCampaignAnalyticsDailyOptions) =>
+    getCampaignAnalyticsDailyWithBreaker.fire(options),
+  rateLimiter
+);
+
+const getCampaignAnalyticsStepsWithBreaker = createCircuitBreaker(
+  getCampaignAnalyticsStepsInternal,
+  {
+    timeout: 15000,
+    name: 'instantly.getCampaignAnalyticsSteps',
+  }
+);
+
+/**
+ * Get analytics breakdown by campaign steps/sequences
+ *
+ * @param options - Campaign ID and API key
+ * @returns Analytics data for each step in the campaign sequence
+ *
+ * @example
+ * const result = await getCampaignAnalyticsSteps({
+ *   apiKey: 'your-api-key',
+ *   campaignId: 'camp_123456'
+ * });
+ */
+export const getCampaignAnalyticsSteps = withRateLimit(
+  (options: GetCampaignAnalyticsStepsOptions) =>
+    getCampaignAnalyticsStepsWithBreaker.fire(options),
+  rateLimiter
+);
+
+// Account Functions
+const createAccountWithBreaker = createCircuitBreaker(createAccountInternal, {
+  timeout: 15000,
+  name: 'instantly.createAccount',
+});
+
+/**
+ * Create a new email account in Instantly.ai
+ *
+ * @param options - Email, first/last name, provider code, and complete SMTP/IMAP configuration
+ * @returns Created account object
+ *
+ * @example
+ * const result = await createAccount({
+ *   apiKey: 'your-api-key',
+ *   email: 'sender@example.com',
+ *   first_name: 'John',
+ *   last_name: 'Doe',
+ *   provider_code: 1, // Numeric provider code
+ *   smtp_host: 'smtp.gmail.com',
+ *   smtp_port: 587,
+ *   smtp_username: 'sender@example.com',
+ *   smtp_password: 'app-password',
+ *   imap_host: 'imap.gmail.com',
+ *   imap_port: 993,
+ *   imap_username: 'sender@example.com',
+ *   imap_password: 'app-password'
+ * });
+ */
+export const createAccount = withRateLimit(
+  (options: CreateAccountOptions) => createAccountWithBreaker.fire(options),
+  rateLimiter
+);
+
+const listAccountsWithBreaker = createCircuitBreaker(listAccountsInternal, {
+  timeout: 15000,
+  name: 'instantly.listAccounts',
+});
+
+/**
+ * List all email accounts in your Instantly.ai workspace
+ *
+ * @param options - Pagination parameters
+ * @returns Array of email account objects
+ *
+ * @example
+ * const result = await listAccounts({
+ *   apiKey: 'your-api-key',
+ *   limit: 50,
+ *   offset: 0
+ * });
+ */
+export const listAccounts = withRateLimit(
+  (options: ListAccountsOptions) => listAccountsWithBreaker.fire(options),
+  rateLimiter
+);
+
+const getAccountWithBreaker = createCircuitBreaker(getAccountInternal, {
+  timeout: 15000,
+  name: 'instantly.getAccount',
+});
+
+/**
+ * Get details of a specific email account
+ *
+ * @param options - Email address to retrieve
+ * @returns Account object with full details
+ *
+ * @example
+ * const result = await getAccount({
+ *   apiKey: 'your-api-key',
+ *   email: 'sender@example.com'
+ * });
+ */
+export const getAccount = withRateLimit(
+  (options: GetAccountOptions) => getAccountWithBreaker.fire(options),
+  rateLimiter
+);
+
+const updateAccountWithBreaker = createCircuitBreaker(updateAccountInternal, {
+  timeout: 15000,
+  name: 'instantly.updateAccount',
+});
+
+/**
+ * Update email account settings
+ *
+ * @param options - Email address and fields to update
+ * @returns Updated account object
+ *
+ * @example
+ * const result = await updateAccount({
+ *   apiKey: 'your-api-key',
+ *   email: 'sender@example.com',
+ *   daily_limit: 50,
+ *   warmup_enabled: true
+ * });
+ */
+export const updateAccount = withRateLimit(
+  (options: UpdateAccountOptions) => updateAccountWithBreaker.fire(options),
+  rateLimiter
+);
+
+const deleteAccountWithBreaker = createCircuitBreaker(deleteAccountInternal, {
+  timeout: 15000,
+  name: 'instantly.deleteAccount',
+});
+
+/**
+ * Delete an email account from Instantly.ai
+ *
+ * @param options - Email address to delete
+ * @returns Success response
+ *
+ * @example
+ * const result = await deleteAccount({
+ *   apiKey: 'your-api-key',
+ *   email: 'sender@example.com'
+ * });
+ */
+export const deleteAccount = withRateLimit(
+  (options: DeleteAccountOptions) => deleteAccountWithBreaker.fire(options),
+  rateLimiter
+);
+
+const enableWarmupWithBreaker = createCircuitBreaker(enableWarmupInternal, {
+  timeout: 15000,
+  name: 'instantly.enableWarmup',
+});
+
+/**
+ * Enable email warmup for an account to improve deliverability
+ *
+ * @param options - Email address to enable warmup for
+ * @returns Success response
+ *
+ * @example
+ * const result = await enableWarmup({
+ *   apiKey: 'your-api-key',
+ *   email: 'sender@example.com'
+ * });
+ */
+export const enableWarmup = withRateLimit(
+  (options: WarmupActionOptions) => enableWarmupWithBreaker.fire(options),
+  rateLimiter
+);
+
+const disableWarmupWithBreaker = createCircuitBreaker(disableWarmupInternal, {
+  timeout: 15000,
+  name: 'instantly.disableWarmup',
+});
+
+/**
+ * Disable email warmup for an account
+ *
+ * @param options - Email address to disable warmup for
+ * @returns Success response
+ *
+ * @example
+ * const result = await disableWarmup({
+ *   apiKey: 'your-api-key',
+ *   email: 'sender@example.com'
+ * });
+ */
+export const disableWarmup = withRateLimit(
+  (options: WarmupActionOptions) => disableWarmupWithBreaker.fire(options),
+  rateLimiter
+);
+
+const fixAccountsWithBreaker = createCircuitBreaker(fixAccountsInternal, {
+  timeout: 15000,
+  name: 'instantly.fixAccounts',
+});
+
+/**
+ * Mark multiple accounts as fixed after resolving connection issues
+ *
+ * @param options - Array of email addresses to mark as fixed
+ * @returns Success response
+ *
+ * @example
+ * const result = await fixAccounts({
+ *   apiKey: 'your-api-key',
+ *   emails: ['account1@example.com', 'account2@example.com']
+ * });
+ */
+export const fixAccounts = withRateLimit(
+  (options: FixAccountsOptions) => fixAccountsWithBreaker.fire(options),
+  rateLimiter
+);
+
+const deleteMultipleAccountsWithBreaker = createCircuitBreaker(deleteMultipleAccountsInternal, {
+  timeout: 15000,
+  name: 'instantly.deleteMultipleAccounts',
+});
+
+/**
+ * Delete multiple email accounts in bulk
+ *
+ * @param options - Array of email addresses to delete
+ * @returns Success response
+ *
+ * @example
+ * const result = await deleteMultipleAccounts({
+ *   apiKey: 'your-api-key',
+ *   emails: ['old1@example.com', 'old2@example.com']
+ * });
+ */
+export const deleteMultipleAccounts = withRateLimit(
+  (options: DeleteMultipleAccountsOptions) => deleteMultipleAccountsWithBreaker.fire(options),
+  rateLimiter
+);
+
+const updateCustomTrackingDomainWithBreaker = createCircuitBreaker(
+  updateCustomTrackingDomainInternal,
+  {
+    timeout: 15000,
+    name: 'instantly.updateCustomTrackingDomain',
+  }
+);
+
+/**
+ * Update custom tracking domain for an email account
+ *
+ * @param options - Account email and custom tracking domain
+ * @returns Success response
+ *
+ * @example
+ * const result = await updateCustomTrackingDomain({
+ *   apiKey: 'your-api-key',
+ *   email: 'sender@example.com',
+ *   custom_tracking_domain: 'track.mydomain.com'
+ * });
+ */
+export const updateCustomTrackingDomain = withRateLimit(
+  (options: UpdateCustomTrackingDomainOptions) =>
+    updateCustomTrackingDomainWithBreaker.fire(options),
   rateLimiter
 );

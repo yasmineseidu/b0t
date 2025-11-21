@@ -1378,6 +1378,22 @@ export const PLATFORM_CONFIGS: Record<string, PlatformConfig> = {
     ]
   },
 
+  todoist: {
+    id: 'todoist',
+    name: 'Todoist',
+    category: 'Productivity',
+    fields: [
+      {
+        key: 'api_key',
+        label: 'API Key',
+        type: 'password',
+        required: true,
+        placeholder: 'Your Todoist API token',
+        description: 'API token from Todoist Settings > Integrations > Developer'
+      }
+    ]
+  },
+
   // ============================================
   // CLOUD STORAGE
   // ============================================
@@ -1439,6 +1455,22 @@ export const PLATFORM_CONFIGS: Record<string, PlatformConfig> = {
         type: 'password',
         required: true,
         description: 'OAuth 2.0 access token for LinkedIn API'
+      }
+    ]
+  },
+
+  heyreach: {
+    id: 'heyreach',
+    name: 'HeyReach',
+    category: 'Social Media',
+    fields: [
+      {
+        key: 'api_key',
+        label: 'API Key',
+        type: 'password',
+        required: true,
+        placeholder: 'your_heyreach_api_key',
+        description: 'Your HeyReach API key from Dashboard → Integrations → HeyReach API'
       }
     ]
   },

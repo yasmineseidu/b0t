@@ -329,6 +329,7 @@ const PLATFORM_CAPABILITIES: Record<string, PlatformCapability> = {
   'linkedin': { category: 'oauth' },
   'facebook': { category: 'oauth' },
   'calendar': { category: 'oauth' }, // Alias for google-calendar
+  'heyreach': { category: 'api_key' }, // LinkedIn automation platform
 
   // ============================================
   // API KEY ONLY
@@ -381,6 +382,43 @@ const PLATFORM_CAPABILITIES: Record<string, PlatformCapability> = {
   'linear': { category: 'api_key' },
   'typeform': { category: 'api_key' },
   'calendly': { category: 'api_key' },
+  'todoist': {
+    category: 'api_key',
+    functionRequirements: {
+      // Task operations
+      'getAllTasks': 'api_key',
+      'getTask': 'api_key',
+      'createTask': 'api_key',
+      'updateTask': 'api_key',
+      'closeTask': 'api_key',
+      'reopenTask': 'api_key',
+      'deleteTask': 'api_key',
+      // Project operations
+      'getAllProjects': 'api_key',
+      'getProject': 'api_key',
+      'createProject': 'api_key',
+      'updateProject': 'api_key',
+      'deleteProject': 'api_key',
+      // Section operations
+      'getAllSections': 'api_key',
+      'getSection': 'api_key',
+      'createSection': 'api_key',
+      'updateSection': 'api_key',
+      'deleteSection': 'api_key',
+      // Comment operations
+      'getAllComments': 'api_key',
+      'getComment': 'api_key',
+      'createComment': 'api_key',
+      'updateComment': 'api_key',
+      'deleteComment': 'api_key',
+      // Label operations
+      'getAllLabels': 'api_key',
+      'getLabel': 'api_key',
+      'createLabel': 'api_key',
+      'updateLabel': 'api_key',
+      'deleteLabel': 'api_key',
+    },
+  },
 
   // Cloud Storage
   'google-drive': {
@@ -763,6 +801,7 @@ export function getPlatformDisplayName(platform: string): string {
     reddit: 'Reddit',
     tiktok: 'TikTok',
     linkedin: 'LinkedIn',
+    heyreach: 'HeyReach',
     facebook: 'Facebook',
 
     // AI
@@ -821,6 +860,7 @@ export function getPlatformDisplayName(platform: string): string {
     linear: 'Linear',
     typeform: 'Typeform',
     calendly: 'Calendly',
+    todoist: 'Todoist',
 
     // Cloud Storage
     'google-drive': 'Google Drive',
@@ -858,6 +898,7 @@ export function getPlatformIcon(platform: string): string {
     reddit: 'MessageSquare',
     tiktok: 'Music',
     linkedin: 'Linkedin',
+    heyreach: 'Users',
     facebook: 'Facebook',
 
     // AI
@@ -916,6 +957,7 @@ export function getPlatformIcon(platform: string): string {
     linear: 'CheckSquare',
     typeform: 'ListChecks',
     calendly: 'Calendar',
+    todoist: 'CheckCircle',
 
     // Cloud Storage
     'google-drive': 'FolderOpen',
