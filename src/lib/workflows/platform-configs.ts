@@ -1131,6 +1131,22 @@ export const PLATFORM_CONFIGS: Record<string, PlatformConfig> = {
     ]
   },
 
+  pandadoc: {
+    id: 'pandadoc',
+    name: 'PandaDoc',
+    category: 'Business',
+    fields: [
+      {
+        key: 'api_key',
+        label: 'API Key',
+        type: 'password',
+        required: true,
+        placeholder: 'Enter your PandaDoc API key',
+        description: 'Your PandaDoc API key from app.pandadoc.com/a/#/settings/api'
+      }
+    ]
+  },
+
   // ============================================
   // MORE DEVELOPER TOOLS
   // ============================================
@@ -1390,22 +1406,6 @@ export const PLATFORM_CONFIGS: Record<string, PlatformConfig> = {
         type: 'password',
         required: true,
         description: 'Personal access token from Calendly integrations'
-      }
-    ]
-  },
-
-  todoist: {
-    id: 'todoist',
-    name: 'Todoist',
-    category: 'Productivity',
-    fields: [
-      {
-        key: 'api_key',
-        label: 'API Key',
-        type: 'password',
-        required: true,
-        placeholder: 'Your Todoist API token',
-        description: 'API token from Todoist Settings > Integrations > Developer'
       }
     ]
   },

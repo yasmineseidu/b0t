@@ -986,6 +986,112 @@ export function getModuleRegistry(): ModuleCategory[] {
           ],
         },
         {
+          name: 'pandadoc',
+          functions: [
+            {
+              name: 'createDocument',
+              description: "Execute createDocument",
+              signature: 'createDocument(input)',
+            },
+            {
+              name: 'listDocuments',
+              description: "Execute listDocuments",
+              signature: 'listDocuments(input)',
+            },
+            {
+              name: 'getDocument',
+              description: "Execute getDocument",
+              signature: 'getDocument(input)',
+            },
+            {
+              name: 'sendDocument',
+              description: "Execute sendDocument",
+              signature: 'sendDocument(input)',
+            },
+            {
+              name: 'downloadDocument',
+              description: "Download document as PDF",
+              signature: 'downloadDocument(input)',
+              example: "const pdf = await downloadDocument({\n  apiKey: '{{credential.pandadoc}}',\n  documentId: 'abc123'\n});",
+            },
+            {
+              name: 'deleteDocument',
+              description: "Execute deleteDocument",
+              signature: 'deleteDocument(input)',
+            },
+            {
+              name: 'createDocumentSession',
+              description: "Execute createDocumentSession",
+              signature: 'createDocumentSession(input)',
+            },
+            {
+              name: 'listTemplates',
+              description: "Execute listTemplates",
+              signature: 'listTemplates(input)',
+            },
+            {
+              name: 'getTemplate',
+              description: "Execute getTemplate",
+              signature: 'getTemplate(input)',
+            },
+            {
+              name: 'createContact',
+              description: "Execute createContact",
+              signature: 'createContact(input)',
+            },
+            {
+              name: 'listContacts',
+              description: "Execute listContacts",
+              signature: 'listContacts(input)',
+            },
+            {
+              name: 'updateContact',
+              description: "Execute updateContact",
+              signature: 'updateContact(input)',
+            },
+            {
+              name: 'deleteContact',
+              description: "Execute deleteContact",
+              signature: 'deleteContact(input)',
+            },
+            {
+              name: 'createWebhook',
+              description: "Execute createWebhook",
+              signature: 'createWebhook(input)',
+            },
+            {
+              name: 'listWebhooks',
+              description: "Execute listWebhooks",
+              signature: 'listWebhooks(input)',
+            },
+            {
+              name: 'updateWebhook',
+              description: "Execute updateWebhook",
+              signature: 'updateWebhook(input)',
+            },
+            {
+              name: 'deleteWebhook',
+              description: "Execute deleteWebhook",
+              signature: 'deleteWebhook(input)',
+            },
+            {
+              name: 'listFolders',
+              description: "Execute listFolders",
+              signature: 'listFolders(input)',
+            },
+            {
+              name: 'createFolder',
+              description: "Execute createFolder",
+              signature: 'createFolder(input)',
+            },
+            {
+              name: 'renameFolder',
+              description: "Execute renameFolder",
+              signature: 'renameFolder(input)',
+            },
+          ],
+        },
+        {
           name: 'pipedrive',
           functions: [
             {

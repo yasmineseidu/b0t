@@ -18,3 +18,4 @@ export * as freshbooks from './freshbooks';
 export * as xero from './xero';
 export * as docusign from './docusign';
 export * as hellosign from './hellosign';
+export * as pandadoc from './pandadoc';

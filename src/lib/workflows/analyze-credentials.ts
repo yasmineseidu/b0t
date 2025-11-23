@@ -358,6 +358,7 @@ const PLATFORM_CAPABILITIES: Record<string, PlatformCapability> = {
 
   // Payments & Business
   'rapidapi': { category: 'api_key' },
+  'pandadoc': { category: 'api_key' },
 
   // Video & Media
   'elevenlabs': { category: 'api_key' },
@@ -836,6 +837,7 @@ export function getPlatformDisplayName(platform: string): string {
     // Payments & Business
     stripe: 'Stripe',
     rapidapi: 'RapidAPI',
+    pandadoc: 'PandaDoc',
 
     // Video & Media
     elevenlabs: 'ElevenLabs',
@@ -933,6 +935,7 @@ export function getPlatformIcon(platform: string): string {
     // Payments & Business
     stripe: 'CreditCard',
     rapidapi: 'Code',
+    pandadoc: 'FileText',
 
     // Video & Media
     elevenlabs: 'Volume2',
