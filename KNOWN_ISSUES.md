@@ -4,9 +4,10 @@ This document tracks known issues in the b0t codebase that are not blocking but 
 
 ## Build-Time Issues
 
-### Next.js Static Generation Errors (Pre-existing)
+### ~~Next.js Static Generation Errors~~ ✅ FIXED
 
-**Status**: Non-blocking (development and runtime work correctly)
+**Status**: Fixed on 2025-01-23
+**Fixed in**: Commit 8cba0d3
 **Severity**: Low
 **First Identified**: 2025-01-23
 
@@ -41,11 +42,14 @@ During `npm run build`, Next.js encounters errors when trying to statically gene
 - The build error was previously hidden by a duplicate `todoist` configuration error
 - Pages function correctly at runtime despite build-time errors
 
-**Potential Fixes** (to be implemented):
-1. Configure Next.js to skip static optimization for affected routes
-2. Restructure root layout to separate server/client components
-3. Add route segment configs to force dynamic rendering
-4. Use Next.js 15 `generateStaticParams` to handle these routes
+**Resolution**:
+1. Created `src/pages/_document.tsx` and `src/pages/_error.tsx` for Pages Router compatibility
+2. Converted `src/app/not-found.tsx` to client component with 'use client' directive
+3. Created `src/app/auth/layout.tsx` with `dynamic: 'force-dynamic'` configuration
+4. Added `dynamic: 'force-dynamic'` to root `src/app/layout.tsx`
+5. Added null guards for `searchParams` in register and credentials pages
+
+**Result**: Build now completes successfully with all 20 pages generated. ✅
 
 **Related Files**:
 - `src/app/not-found.tsx`
