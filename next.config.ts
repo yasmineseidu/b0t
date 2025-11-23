@@ -22,9 +22,9 @@ const nextConfig: NextConfig = {
   // This prevents build errors from trying to prerender dynamic pages
   staticPageGenerationTimeout: 120,
 
-  // Performance optimizations (10-15% bundle size reduction)
+  // Performance optimizations and configuration
   experimental: {
-    // Tree-shake icon libraries for better bundle size
+    // Tree-shake icon libraries for better bundle size (10-15% reduction)
     optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
     // Minify server code in production
     serverMinification: true,
